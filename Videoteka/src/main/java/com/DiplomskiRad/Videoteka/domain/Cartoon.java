@@ -1,5 +1,7 @@
 package com.DiplomskiRad.Videoteka.domain;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,15 +21,15 @@ public class Cartoon {
     @Column(name = "seasons")
     private int seasons;
 
-
+    @ManyToMany
     @JoinTable(name = "cartoon_creator", joinColumns = @JoinColumn(name = "cartoon_id"),
             inverseJoinColumns = @JoinColumn(name = "creator_id"))
     Set<Creator> creators = new HashSet<>();
 
+    @ManyToMany
     @JoinTable(name = "cartoon_genre", joinColumns = @JoinColumn(name = "cartoon_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     Set<Genre> genres = new HashSet<>();
-
 
 
     //Constructor
@@ -35,6 +37,23 @@ public class Cartoon {
     //end const
 
     //getters n setters
+
+
+    public Set<Creator> getCreators() {
+        return creators;
+    }
+
+    public void setCreators(Set<Creator> creators) {
+        this.creators = creators;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
 
     public Long getId() {
         return id;

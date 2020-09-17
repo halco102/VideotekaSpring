@@ -22,6 +22,7 @@ public class Genre {
 
     //getters n setters
 
+
     public Long getId() {
         return id;
     }
