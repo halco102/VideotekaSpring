@@ -10,4 +10,6 @@ public interface MovieService {
 
     List<Movie> findAllMovies();
 
+    void deleteById(Long id);
+
 }

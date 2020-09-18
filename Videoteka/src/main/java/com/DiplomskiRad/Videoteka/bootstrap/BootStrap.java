@@ -9,17 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BootStrap implements CommandLineRunner {
 
-    private MovieRepository movieRepository;
-    private SeriesRepository seriesRepository;
-    private CartoonRepository cartoonRepository;
 
-    public BootStrap(MovieRepository movieRepository,
-                     SeriesRepository seriesRepository,
-                     CartoonRepository cartoonRepository){
-        this.movieRepository=movieRepository;
-        this.seriesRepository=seriesRepository;
-        this.cartoonRepository=cartoonRepository;
-    }
 
     @Override
     public void run(String... args) throws Exception {

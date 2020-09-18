@@ -2,6 +2,7 @@ package com.DiplomskiRad.Videoteka.service;
 
 import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.repositories.MovieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +12,14 @@ public class MovieServiceImp implements MovieService{
 
     private final MovieRepository movieRepository;
 
+    @Autowired
     public MovieServiceImp(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
+    }
+
+    @Override
+    public void deleteById(Long id) { //test
+        movieRepository.deleteById(id);
     }
 
     @Override
