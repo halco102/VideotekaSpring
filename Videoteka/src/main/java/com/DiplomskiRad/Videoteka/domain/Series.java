@@ -20,10 +20,12 @@ public class Series {
     @Column(name = "seasons")
     private int seasons;
 
+    @ManyToMany
     @JoinTable(name = "series_star", joinColumns = @JoinColumn(name = "series_id"),
     inverseJoinColumns = @JoinColumn(name = "star_id"))
     Set<Star> stars = new HashSet<>();
 
+    @ManyToMany
     @JoinTable(name = "series_genre", joinColumns = @JoinColumn(name = "series_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     Set<Genre> genres = new HashSet<>();
@@ -40,6 +42,23 @@ public class Series {
     //End Constructor
 
     //getters n setters
+
+
+    public Set<Star> getStars() {
+        return stars;
+    }
+
+    public void setStars(Set<Star> stars) {
+        this.stars = stars;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
 
     public Long getId() {
         return id;

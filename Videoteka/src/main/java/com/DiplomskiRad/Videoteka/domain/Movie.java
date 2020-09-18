@@ -40,6 +40,23 @@ public class Movie {
 
     //Getters n setters
 
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
+
+    public Set<Star> getStars() {
+        return stars;
+    }
+
+    public void setStars(Set<Star> stars) {
+        this.stars = stars;
+    }
+
     public Long getId() {
         return id;
     }
