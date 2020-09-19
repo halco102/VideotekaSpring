@@ -1,25 +1,18 @@
 package com.DiplomskiRad.Videoteka.controller;
 
 
-import com.DiplomskiRad.Videoteka.domain.Movie;
-import com.DiplomskiRad.Videoteka.repositories.MovieRepository;
-import com.DiplomskiRad.Videoteka.service.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.DiplomskiRad.Videoteka.service.implementation.MovieService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @Controller
-
 @RequestMapping(MovieController.BASE_URL)
 public class MovieController {
 
-    public static final String BASE_URL="/api/v1/videoteka/";
+    public static final String BASE_URL="/api/v1/videoteka";
 
     private final MovieService movieService;
 
@@ -39,15 +32,23 @@ public class MovieController {
         return this.movieService.findMoviebyId(id);
     }
 */
-    @RequestMapping()
+    @GetMapping()
     public  String getIndex(){
         return "videoteka/index.html";
     }
 
-    @RequestMapping("/movies")
+
+    @GetMapping("/movies")
     public String getMovies(Model model){
         model.addAttribute("movies",movieService.findAllMovies());
-        return "videoteka/movies/movies.html";
+        return "videoteka/entertainment/movies.html";
     }
+
+    @GetMapping("/movies/{id}")
+    public String getMovieById(Model model, @PathVariable Long id){
+        model.addAttribute("movies",movieService.findMoviebyId(id));
+        return "videoteka/entertainment/movies.html";
+    }
+
 
 }

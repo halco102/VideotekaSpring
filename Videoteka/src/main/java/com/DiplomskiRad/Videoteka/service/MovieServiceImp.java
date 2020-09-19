@@ -2,17 +2,19 @@ package com.DiplomskiRad.Videoteka.service;
 
 import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.repositories.MovieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.DiplomskiRad.Videoteka.service.implementation.MovieService;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
-public class MovieServiceImp implements MovieService{
+public class MovieServiceImp implements MovieService {
 
     private final MovieRepository movieRepository;
 
-    @Autowired
+
     public MovieServiceImp(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }

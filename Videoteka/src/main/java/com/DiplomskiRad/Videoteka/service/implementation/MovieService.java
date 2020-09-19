@@ -1,4 +1,4 @@
-package com.DiplomskiRad.Videoteka.service;
+package com.DiplomskiRad.Videoteka.service.implementation;
 
 import com.DiplomskiRad.Videoteka.domain.Movie;
 
