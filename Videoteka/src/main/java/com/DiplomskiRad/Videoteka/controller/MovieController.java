@@ -20,27 +20,31 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-
 /*@RestController
     @GetMapping("/movies")
     List<Movie> findAllMovies(){
         return  movieService.findAllMovies();
     }
-
     @GetMapping("/{id}")
     Movie findMoviebyId(@PathVariable  Long id){
         return this.movieService.findMoviebyId(id);
     }
 */
+
     @GetMapping()
     public  String getIndex(){
         return "videoteka/index.html";
     }
 
-
     @GetMapping("/movies")
-    public String getMovies(Model model){
-        model.addAttribute("movies",movieService.findAllMovies());
+    public String getMovies(Model model,String keyword){
+
+        if(keyword != null){
+            model.addAttribute("movies",movieService.findByKeyword(keyword));
+        }else {
+            model.addAttribute("movies", movieService.findAllMovies());
+        }
+
         return "videoteka/entertainment/movies.html";
     }
 

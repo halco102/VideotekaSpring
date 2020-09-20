@@ -31,4 +31,9 @@ public class CartoonServiceImp implements CartoonService {
     public void deleteCartoonById(Long id) {
         cartoonRepository.deleteById(id);
     }
+
+    @Override
+    public List<Cartoon> findByKeyword(String keyword) {
+        return cartoonRepository.findByKeyword(keyword);
+    }
 }

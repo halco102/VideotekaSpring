@@ -33,4 +33,9 @@ public class MovieServiceImp implements MovieService {
     public List<Movie> findAllMovies() {
         return movieRepository.findAll();
     }
+
+    @Override
+    public List<Movie> findByKeyword(String keyword) {
+        return movieRepository.findByKeyword(keyword);
+    }
 }

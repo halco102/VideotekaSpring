@@ -1,5 +1,6 @@
 package com.DiplomskiRad.Videoteka.service;
 
+import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.domain.Series;
 import com.DiplomskiRad.Videoteka.repositories.SeriesRepository;
 import com.DiplomskiRad.Videoteka.service.implementation.SeriesService;
@@ -25,4 +26,8 @@ public class SeriesServiceImp implements SeriesService {
         return seriesRepository.findAll();
     }
 
+    @Override
+    public List<Series> findByKeyword(String keyword) {
+        return seriesRepository.findByKeyword(keyword);
+    }
 }

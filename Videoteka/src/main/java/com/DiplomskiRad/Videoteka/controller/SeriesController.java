@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(MovieController.BASE_URL)
 public class SeriesController {
 
-   public static final String BASE_URL="/api/v1/videoteka/series";
     private final SeriesService seriesService;
 
     public SeriesController(SeriesService seriesService) {
@@ -21,12 +20,17 @@ public class SeriesController {
     }
 
     @GetMapping("/series")
-    public String getSeries(Model model){
-        model.addAttribute("series",seriesService.findAllSeries());
+    public String getSeries(Model model,String keyword){
+        if(keyword!=null){
+         model.addAttribute("series",seriesService.findByKeyword(keyword));
+        }else {
+            model.addAttribute("series", seriesService.findAllSeries());
+        }
+
         return "videoteka/entertainment/series.html";
     }
 
-    @GetMapping("series[/{id}")
+    @GetMapping("series/{id}")
     public String getSeriesById(Model model, @PathVariable Long id){
         model.addAttribute("series",seriesService.findSeriesById(id));
         return "videoteka/entertainment/series.html";

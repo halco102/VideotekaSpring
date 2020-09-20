@@ -7,4 +7,5 @@ import java.util.List;
 public interface SeriesService {
     Series findSeriesById(Long id);
     List<Series> findAllSeries();
+    List<Series> findByKeyword(String keyword);
 }

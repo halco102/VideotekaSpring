@@ -12,4 +12,6 @@ public interface MovieService {
 
     void deleteById(Long id);
 
+    List<Movie> findByKeyword(String keyword);
+
 }
