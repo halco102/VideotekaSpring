@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="/css/entertainment.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Cartoon</title>
+</head>
+<body>
+<h1>Cartoon</h1>
+
+<div style="background-color:white;width: 80%;
+        margin: 0 auto;
+        padding: 20px;">
+
+    <form th:action="@{/api/v1/videoteka/cartoon}" method="get">
+        <input id="txtSearch" type="text" name="keyword">
+        <button type="submit">Go</button>
+    </form>
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Seasons</th>
+        </tr>
+        <tr th:each="cartoon : ${cartoons}">
+            <td th:text="${cartoon.id}"></td>
+            <td th:text="${cartoon.name}"></td>
+            <td th:text="${cartoon.year}"></td>
+            <td th:text="${cartoon.seasons}"></td>
+        </tr>
+    </table>
+
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="/css/entertainment.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Series</title>
+</head>
+<body>
+<h1>Series</h1>
+
+<div style="background-color:white;width: 80%;
+        margin: 0 auto;
+        padding: 20px;">
+
+    <form th:action="@{/api/v1/videoteka/series}" method="get">
+        <input id="txtSearch" type="text" name="keyword">
+        <button type="submit">Go</button>
+    </form>
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Seasons</th>
+        </tr>
+        <tr th:each="series : ${series}">
+            <td th:text="${series.id}"></td>
+            <td th:text="${series.name}"></td>
+            <td th:text="${series.year}"></td>
+            <td th:text="${series.seasons}"></td>
+        </tr>
+    </table>
+
+</div>
+
+
+
+</body>
+</html>

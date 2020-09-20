@@ -1,0 +1,19 @@
+body{
+    background-color:grey;
+}
+
+.table{
+     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+      margin:5px auto;
+}
+
+h1{
+    text-align:center;
+}
+
+td,th,table{
+ border:1px solid black;
+ text-align:center;
+}
