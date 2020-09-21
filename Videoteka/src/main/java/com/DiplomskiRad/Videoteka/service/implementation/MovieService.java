@@ -14,4 +14,6 @@ public interface MovieService {
 
     List<Movie> findByKeyword(String keyword);
 
+    List<Movie> getAllMovieGenres();
+
 }

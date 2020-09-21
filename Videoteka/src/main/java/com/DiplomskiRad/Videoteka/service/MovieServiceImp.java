@@ -6,6 +6,7 @@ import com.DiplomskiRad.Videoteka.service.implementation.MovieService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,4 +39,10 @@ public class MovieServiceImp implements MovieService {
     public List<Movie> findByKeyword(String keyword) {
         return movieRepository.findByKeyword(keyword);
     }
+
+    @Override
+    public List<Movie> getAllMovieGenres() {
+        return movieRepository.getAllMovieGenres();
+    }
+
 }

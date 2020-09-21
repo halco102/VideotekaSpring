@@ -15,8 +15,10 @@ public class SeriesController {
 
     private final SeriesService seriesService;
 
+
     public SeriesController(SeriesService seriesService) {
         this.seriesService = seriesService;
+
     }
 
     @GetMapping("/series")
