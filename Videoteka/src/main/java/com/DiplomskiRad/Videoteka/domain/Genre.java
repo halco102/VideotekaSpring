@@ -1,6 +1,8 @@
 package com.DiplomskiRad.Videoteka.domain;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "genre")
@@ -13,6 +15,12 @@ public class Genre {
     @Column(name = "name",unique = true)
     private String name;
 
+    @ManyToMany(mappedBy = "genres")
+    private Set<Movie> movie;
+
+    @ManyToMany(mappedBy = "genres")
+    private Set<Series>series;
+
     //Constructor
     public Genre(){};
     public Genre(String name){
@@ -22,6 +30,22 @@ public class Genre {
 
     //getters n setters
 
+
+    public Set<Series> getSeries() {
+        return series;
+    }
+
+    public void setSeries(Set<Series> series) {
+        this.series = series;
+    }
+
+    public Set<Movie> getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Set<Movie> movie) {
+        this.movie = movie;
+    }
 
     public Long getId() {
         return id;

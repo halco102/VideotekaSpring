@@ -14,4 +14,6 @@ public interface CartoonService {
     void deleteCartoonById(Long id);
 
     List<Cartoon> findByKeyword(String keyword);
+
+    List<Cartoon> getAllCartoonGenres();
 }

@@ -23,6 +23,7 @@ public class CartoonController {
             model.addAttribute("cartoons",cartoonService.findByKeyword(keyword));
         }else {
             model.addAttribute("cartoons", cartoonService.findAllCartoons());
+            model.addAttribute("cartoons",cartoonService.getAllCartoonGenres());
         }
 
         return "videoteka/entertainment/cartoon.html";
