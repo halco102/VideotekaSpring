@@ -27,6 +27,11 @@ public class SeriesServiceImp implements SeriesService {
     }
 
     @Override
+    public List<Series> getAllSeriesGenres() {
+        return seriesRepository.getAllSeriesGenres();
+    }
+
+    @Override
     public List<Series> findByKeyword(String keyword) {
         return seriesRepository.findByKeyword(keyword);
     }

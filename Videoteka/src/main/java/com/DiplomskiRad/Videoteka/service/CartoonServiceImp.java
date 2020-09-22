@@ -23,6 +23,11 @@ public class CartoonServiceImp implements CartoonService {
     }
 
     @Override
+    public List<Cartoon> getAllCartoonGenres() {
+        return cartoonRepository.getAllCartoonGenres();
+    }
+
+    @Override
     public List<Cartoon> findAllCartoons() {
         return cartoonRepository.findAll();
     }

@@ -18,6 +18,9 @@ public class Genre {
     @ManyToMany(mappedBy = "genres")
     private Set<Movie> movie;
 
+    @ManyToMany(mappedBy = "genres")
+    private Set<Series>series;
+
     //Constructor
     public Genre(){};
     public Genre(String name){
@@ -27,6 +30,14 @@ public class Genre {
 
     //getters n setters
 
+
+    public Set<Series> getSeries() {
+        return series;
+    }
+
+    public void setSeries(Set<Series> series) {
+        this.series = series;
+    }
 
     public Set<Movie> getMovie() {
         return movie;

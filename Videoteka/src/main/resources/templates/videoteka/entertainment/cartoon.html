@@ -24,12 +24,16 @@
             <th>Title</th>
             <th>Year</th>
             <th>Seasons</th>
+            <th>Genre</th>
         </tr>
         <tr th:each="cartoon : ${cartoons}">
             <td th:text="${cartoon.id}"></td>
             <td th:text="${cartoon.name}"></td>
             <td th:text="${cartoon.year}"></td>
             <td th:text="${cartoon.seasons}"></td>
+            <td><span th:each="genres : ${cartoon.genres}"
+                      th:text="${genres.name + ' '}">
+            </span></td>
         </tr>
     </table>
 

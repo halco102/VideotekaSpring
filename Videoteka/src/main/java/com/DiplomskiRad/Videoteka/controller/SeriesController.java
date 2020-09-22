@@ -27,6 +27,7 @@ public class SeriesController {
          model.addAttribute("series",seriesService.findByKeyword(keyword));
         }else {
             model.addAttribute("series", seriesService.findAllSeries());
+            model.addAttribute("series",seriesService.getAllSeriesGenres());
         }
 
         return "videoteka/entertainment/series.html";
