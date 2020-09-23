@@ -17,7 +17,7 @@ public class CartoonController {
         this.cartoonService = cartoonService;
     }
 
-    @GetMapping("/cartoon")
+    @GetMapping("/cartoons")
     public String getCartoons(Model model,String keyword){
         if(keyword!=null){
             model.addAttribute("cartoons",cartoonService.findByKeyword(keyword));
@@ -29,7 +29,7 @@ public class CartoonController {
         return "videoteka/entertainment/cartoon.html";
     }
 
-    @GetMapping("cartoon/{id}")
+    @GetMapping("cartoons/{id}")
     public String getCartoonById(@PathVariable Long id, Model model){
         model.addAttribute("cartoons",cartoonService.findCartoonById(id));
         return "videoteka/entertainment/cartoon.html";

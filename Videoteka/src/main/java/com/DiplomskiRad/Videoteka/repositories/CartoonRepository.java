@@ -16,4 +16,7 @@ public interface CartoonRepository extends JpaRepository<Cartoon,Long> {
             "inner join genre as g on cg.genre_id = g.id " +
             "inner join cartoon as c on cg.cartoon_id = c.id group by c.id",nativeQuery = true)
     List<Cartoon> getAllCartoonGenres();
+
+
+
 }
