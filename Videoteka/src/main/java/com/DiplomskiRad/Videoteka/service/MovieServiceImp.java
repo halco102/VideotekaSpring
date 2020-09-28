@@ -3,10 +3,8 @@ package com.DiplomskiRad.Videoteka.service;
 import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.repositories.MovieRepository;
 import com.DiplomskiRad.Videoteka.service.implementation.MovieService;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,8 +19,8 @@ public class MovieServiceImp implements MovieService {
     }
 
     @Override
-    public void deleteById(Long id) { //test
-        movieRepository.deleteById(id);
+    public Movie deleteMovieById(Long id) {
+        return movieRepository.deleteMovieById(id);
     }
 
     @Override
@@ -55,4 +53,8 @@ public class MovieServiceImp implements MovieService {
         return movieRepository.getAllMovieGenres();
     }
 
+    @Override
+    public void deleteMovie(Long id) {
+        movieRepository.deleteById(id);
+    }
 }

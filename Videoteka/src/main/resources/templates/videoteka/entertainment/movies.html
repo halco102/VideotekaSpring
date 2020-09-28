@@ -19,6 +19,7 @@
     </form>
 
 
+
     <table class="table">
         <tr>
             <th>ID</th>
@@ -35,6 +36,7 @@
             <td><span th:each="genres : ${movie.genres}"
                       th:text="${genres.name + ' '}">
             </span></td>
+            <td><a th:href="@{/api/v1/videoteka/deleteMovie/{id}(id=${movie.id})}">Delete</a></td>
         </tr>
 
     </table>

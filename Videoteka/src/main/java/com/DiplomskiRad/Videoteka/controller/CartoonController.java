@@ -20,7 +20,7 @@ public class CartoonController {
     @GetMapping("/cartoons")
     public String getCartoons(Model model,String keyword){
         if(keyword!=null){
-            model.addAttribute("cartoons",cartoonService.findByKeyword(keyword));
+            model.addAttribute("cartoons", cartoonService.findByKeyword(keyword));
         }else {
             model.addAttribute("cartoons", cartoonService.findAllCartoons());
             model.addAttribute("cartoons",cartoonService.getAllCartoonGenres());

@@ -9,9 +9,10 @@ import java.util.Set;
 public class Movie {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
     @Column(name = "name",unique = true)
     private String name;
     @Column(name = "year")

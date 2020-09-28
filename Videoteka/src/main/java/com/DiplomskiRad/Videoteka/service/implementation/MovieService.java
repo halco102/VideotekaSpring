@@ -1,6 +1,7 @@
 package com.DiplomskiRad.Videoteka.service.implementation;
 
 import com.DiplomskiRad.Videoteka.domain.Movie;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -10,10 +11,14 @@ public interface MovieService {
 
     List<Movie> findAllMovies();
 
-    void deleteById(Long id);
+    Movie deleteMovieById(@Param("id") Long id);
 
     List<Movie> findByKeyword(String keyword);
 
     List<Movie> getAllMovieGenres();
+
+    void deleteMovie(Long id);
+
+
 
 }

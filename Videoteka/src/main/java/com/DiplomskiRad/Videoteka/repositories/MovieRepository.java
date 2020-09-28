@@ -19,6 +19,9 @@ public interface MovieRepository extends  JpaRepository<Movie,Long> { //umjesto 
             "inner join movie as m on mg.movie_id = m.id group by m.id",nativeQuery = true)
     List<Movie> getAllMovieGenres();
 
+    @Query(value = "Select * from movie as m where m.id = :id",nativeQuery = true)
+    Movie deleteMovieById(@Param("id") Long id);
+
     //m.id,m.name,m.runtime,m.year,g.name
 
 }

@@ -23,13 +23,7 @@ public class SeriesController {
 
     @GetMapping("/series")
     public String getSeries(Model model,String keyword){
-        if(keyword!=null){
-         model.addAttribute("series",seriesService.findByKeyword(keyword));
-        }else {
-            model.addAttribute("series", seriesService.findAllSeries());
-            model.addAttribute("series",seriesService.getAllSeriesGenres());
-        }
-
+        model.addAttribute("series",seriesService.findByKeyword(keyword));
         return "videoteka/entertainment/series.html";
     }
 
