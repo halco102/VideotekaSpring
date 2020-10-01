@@ -42,14 +42,15 @@
         </table>
 
 
-        <label>Genres</label>
-        <select th:field="*{genres}">
-            <option th:each="p : ${g}" th:value="${p.id}" th:text="${p.name}" />
-        </select>
-        <br/>
 
+
+        <div th:each="p:${g}">
+            <input type="checkbox" th:name="ids" th:value="${p.id}">
+            <p th:text="${p.name}"></p>
+        </div>
 
         <button type="submit movies">Go</button>
+
     </form>
 
 

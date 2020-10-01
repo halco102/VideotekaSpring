@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -73,10 +74,15 @@ public class MovieController {
 
 
     @PostMapping("/addEntertainment/movies")
-    public String submitForm(@ModelAttribute("movies") Movie movies){
+    public String submitForm(@ModelAttribute("movies") Movie movies,
+                             @RequestParam("ids") List<Genre> genres){
 
         System.out.println(" name " + movies.getName());
-        System.out.println("genres " + movies.getGenres().toString());
+        System.out.println(" genre " + genres.size());
+        for(int i = 0 ; i < genres.size();i++ ){
+            movies.getGenres().add(genres.get(i));
+        }
+
 
         //System.out.println("jebiga " + name);
 
