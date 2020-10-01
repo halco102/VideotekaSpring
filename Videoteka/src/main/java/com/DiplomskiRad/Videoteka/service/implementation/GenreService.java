@@ -9,4 +9,8 @@ public interface GenreService {
     List<Genre> findAllGenre();
     Genre findGenreById(Long id);
 
+    //new
+
+    void save(Genre genre);
+
 }

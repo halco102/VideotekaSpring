@@ -1,18 +1,17 @@
 package com.DiplomskiRad.Videoteka.controller;
 
 
+import com.DiplomskiRad.Videoteka.domain.Genre;
 import com.DiplomskiRad.Videoteka.domain.Movie;
+import com.DiplomskiRad.Videoteka.repositories.GenreRepository;
 import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
 import com.DiplomskiRad.Videoteka.service.implementation.MovieService;
-import org.dom4j.rule.Mode;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -22,11 +21,13 @@ public class MovieController {
     public static final String BASE_URL="/api/v1/videoteka";
 
     private final MovieService movieService;
+    private final GenreService genreService;
+    private final GenreRepository genreRepository;
 
-
-    public MovieController(MovieService movieService){
-
+    public MovieController(MovieService movieService, GenreService genreService, GenreRepository genreRepository){
+        this.genreService=genreService;
         this.movieService = movieService;
+        this.genreRepository = genreRepository;
     }
 
     @GetMapping()
@@ -53,8 +54,37 @@ public class MovieController {
       movieService.deleteMovie(id);
       model.addAttribute("movies",movieService.findAllMovies());
       return "videoteka/entertainment/movies.html";
+
     }
 
+
+    @GetMapping("/addEntertainment/movies")
+    public  String addEntertainment(Model model,String keyword){
+        Movie movies = new Movie();
+
+        model.addAttribute("movies",movies);
+
+        List<Genre> genres = new ArrayList<>();
+        genreRepository.findAll().iterator().forEachRemaining(genres::add);
+        model.addAttribute("g",genres);
+
+        return "videoteka/admin/add.html";
+    }
+
+
+    @PostMapping("/addEntertainment/movies")
+    public String submitForm(@ModelAttribute("movies") Movie movies){
+
+        System.out.println(" name " + movies.getName());
+        System.out.println("genres " + movies.getGenres().toString());
+
+        //System.out.println("jebiga " + name);
+
+        movieService.save(movies);
+
+        return "videoteka/entertainment/movies.html";
+
+    }
 
 
 

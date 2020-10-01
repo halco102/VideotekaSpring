@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add entertainment</title>
+</head>
+<body>
+<h1 style="text-align:center">Add</h1>
+
+<div style="align:center">
+
+
+    <form action="#"
+          th:action="@{/api/v1/videoteka/addEntertainment/movies}"
+          method="post"
+          th:object="${movies}"
+    >
+
+
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Runtime</th>
+                <th>Genres</th>
+            </tr>
+
+            <tr >
+                <td>
+                    <input type="text" th:field="*{name}">
+                </td>
+                <td>
+                    <input type="text" th:field="*{runtime}">
+                </td>
+                <td>
+                    <input type="text" th:field="*{year}">
+                </td>
+            </tr>
+
+
+        </table>
+
+
+        <label>Genres</label>
+        <select th:field="*{genres}">
+            <option th:each="p : ${g}" th:value="${p.id}" th:text="${p.name}" />
+        </select>
+        <br/>
+
+
+        <button type="submit movies">Go</button>
+    </form>
+
+
+</div>
+
+
+
+
+</body>
+</html>
