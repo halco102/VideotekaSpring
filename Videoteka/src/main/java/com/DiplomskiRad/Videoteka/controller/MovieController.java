@@ -83,9 +83,6 @@ public class MovieController {
             movies.getGenres().add(genres.get(i));
         }
 
-
-        //System.out.println("jebiga " + name);
-
         movieService.save(movies);
 
         return "videoteka/entertainment/movies.html";
