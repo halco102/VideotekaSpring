@@ -54,25 +54,27 @@ public class MovieController {
     public String deleteId(Model model, @PathVariable Long id){
       movieService.deleteMovie(id);
       model.addAttribute("movies",movieService.findAllMovies());
-      return "videoteka/entertainment/movies.html";
+
+      //return "videoteka/entertainment/movies.html";
+        return "redirect:/api/v1/videoteka/admin-add-delete/movies";
 
     }
 
 
-    @GetMapping("/addEntertainment/movies")
+    @GetMapping("/admin-add-delete/movies")
     public  String addEntertainment(Model model,String keyword){
         Movie movies = new Movie();
         model.addAttribute("movies",movies);
         List<Genre> genres = new ArrayList<>();
         genreRepository.findAll().iterator().forEachRemaining(genres::add);
         model.addAttribute("g",genres);
-
+        model.addAttribute("m",movieService.findByKeyword(keyword));
 
         return "videoteka/admin/add.html";
     }
 
 
-    @PostMapping("/addEntertainment/movies")
+    @PostMapping("/admin-add-delete/movies")
     public String submitForm(@ModelAttribute("movies") Movie movies,
                              @RequestParam("ids") List<Genre> genres,
                              Model model){
@@ -85,7 +87,7 @@ public class MovieController {
         movieService.save(movies);
 
 
-        return "redirect:/api/v1/videoteka/movies";
+        return "redirect:/api/v1/videoteka/admin-add-delete/movies";
     }
 
 
