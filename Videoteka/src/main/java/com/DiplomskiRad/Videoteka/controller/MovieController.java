@@ -62,9 +62,7 @@ public class MovieController {
     @GetMapping("/addEntertainment/movies")
     public  String addEntertainment(Model model,String keyword){
         Movie movies = new Movie();
-
         model.addAttribute("movies",movies);
-
         List<Genre> genres = new ArrayList<>();
         genreRepository.findAll().iterator().forEachRemaining(genres::add);
         model.addAttribute("g",genres);
@@ -77,16 +75,11 @@ public class MovieController {
     public String submitForm(@ModelAttribute("movies") Movie movies,
                              @RequestParam("ids") List<Genre> genres){
 
-        System.out.println(" name " + movies.getName());
-        System.out.println(" genre " + genres.size());
         for(int i = 0 ; i < genres.size();i++ ){
             movies.getGenres().add(genres.get(i));
         }
-
         movieService.save(movies);
-
         return "videoteka/entertainment/movies.html";
-
     }
 
 

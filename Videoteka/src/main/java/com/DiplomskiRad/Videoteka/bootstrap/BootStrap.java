@@ -38,9 +38,18 @@ public class BootStrap implements CommandLineRunner {
         Genre g1 = new Genre("g1");
         Genre g2 = new Genre("g2");
         Genre g3 = new Genre("g3");
+        Genre g4 = new Genre("g4");
+        Genre g5 = new Genre("g5");
+        Genre g6 = new Genre("g6");
+        Genre g7 = new Genre("g7");
+        Genre g8 = new Genre("g8");
+        Genre g9 = new Genre("g9");
+        Genre g10 = new Genre("g10");
+        Genre g11 = new Genre("g11");
+        Genre g12= new Genre("g12");
 
         //save genres
-        genreRepository.saveAll(Arrays.asList(g1,g2,g3));
+        genreRepository.saveAll(Arrays.asList(g1,g2,g3,g4,g5,g6,g7,g8,g9,g10,g11,g12));
 
         //add genres to movie
         movie.getGenres().addAll(Arrays.asList(g1,g2,g3));

@@ -9,7 +9,12 @@
 
 <body>
     <div class="controller_div">
-        
+
+        <form th:action="@{/api/v1/videoteka/movies}" method="get">
+            <input id="txtSearch" type="text" name="keyword">
+            <button type="submit">Go</button>
+        </form>
+
     <table class="table">
       <tr>
           <th>ID</th>
