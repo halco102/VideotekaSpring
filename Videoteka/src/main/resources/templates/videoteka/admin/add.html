@@ -56,7 +56,29 @@
 
 </div>
 
+<div class="getAllMovies">
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Runtime</th>
+            <th>Genre</th>
+        </tr>
+        <tr th:each="movie : ${m}">
+            <td th:text="${movie.id}"></td>
+            <td th:text="${movie.name}"></td>
+            <td th:text="${movie.year}"></td>
+            <td th:text="${movie.runtime}"></td>
+            <td><span th:each="genres : ${movie.genres}"
+                      th:text="${genres.name + ' '}">
+          </span></td>
+            <td><a th:href="@{/api/v1/videoteka/deleteMovie/{id}(id=${movie.id})}">Delete</a></td>
+        </tr>
 
+    </table>
+
+</div>
 
 
 </body>

@@ -67,19 +67,25 @@ public class MovieController {
         genreRepository.findAll().iterator().forEachRemaining(genres::add);
         model.addAttribute("g",genres);
 
+
         return "videoteka/admin/add.html";
     }
 
 
     @PostMapping("/addEntertainment/movies")
     public String submitForm(@ModelAttribute("movies") Movie movies,
-                             @RequestParam("ids") List<Genre> genres){
+                             @RequestParam("ids") List<Genre> genres,
+                             Model model){
 
         for(int i = 0 ; i < genres.size();i++ ){
             movies.getGenres().add(genres.get(i));
         }
+
+
         movieService.save(movies);
-        return "videoteka/entertainment/movies.html";
+
+
+        return "redirect:/api/v1/videoteka/movies";
     }
 
 
