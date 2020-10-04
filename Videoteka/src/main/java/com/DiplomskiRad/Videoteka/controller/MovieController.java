@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,6 +61,13 @@ public class MovieController {
 
     }
 
+    @GetMapping("/edit-movie/{id}")
+    public String editMovie(Model model, @PathVariable Long id,Movie movie){
+            Movie newMovie= movieService.findMoviebyId(movie.getId());
+            System.out.println(newMovie.getName());
+
+             return "redirect:/api/v1/videoteka/admin-add-delete/movies";
+    }
 
     @GetMapping("/admin-add-delete/movies")
     public  String addEntertainment(Model model,String keyword){
@@ -75,7 +83,7 @@ public class MovieController {
 
 
     @PostMapping("/admin-add-delete/movies")
-    public String submitForm(@ModelAttribute("movies") Movie movies,
+    public String submitForm(@Valid @ModelAttribute("movies") Movie movies,
                              @RequestParam("ids") List<Genre> genres,
                              Model model){
 
@@ -83,6 +91,7 @@ public class MovieController {
             movies.getGenres().add(genres.get(i));
         }
 
+        System.out.println("Movies" + movies.getRuntime());
 
         movieService.save(movies);
 

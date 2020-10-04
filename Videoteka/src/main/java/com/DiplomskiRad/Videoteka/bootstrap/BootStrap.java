@@ -26,9 +26,9 @@ public class BootStrap implements CommandLineRunner {
         System.out.println("Bootstrap started!");
 
         //create movie
-        Movie movie = new Movie("Test1",1,20);
-        Movie movie1 = new Movie("Test2",2,40);
-        Movie movie2 = new Movie("KKK",3,30);
+        Movie movie = new Movie("Test1",1999,20);
+        Movie movie1 = new Movie("Test2",2002,40);
+        Movie movie2 = new Movie("KKK",2003,30);
         //save movie
         movieRepository.save(movie);
         movieRepository.save(movie1);
