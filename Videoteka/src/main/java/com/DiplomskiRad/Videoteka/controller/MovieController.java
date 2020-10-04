@@ -1,18 +1,19 @@
 package com.DiplomskiRad.Videoteka.controller;
 
 
+import com.DiplomskiRad.Videoteka.domain.Genre;
 import com.DiplomskiRad.Videoteka.domain.Movie;
+import com.DiplomskiRad.Videoteka.repositories.GenreRepository;
 import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
 import com.DiplomskiRad.Videoteka.service.implementation.MovieService;
-import org.dom4j.rule.Mode;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 @Controller
@@ -22,11 +23,13 @@ public class MovieController {
     public static final String BASE_URL="/api/v1/videoteka";
 
     private final MovieService movieService;
+    private final GenreService genreService;
+    private final GenreRepository genreRepository;
 
-
-    public MovieController(MovieService movieService){
-
+    public MovieController(MovieService movieService, GenreService genreService, GenreRepository genreRepository){
+        this.genreService=genreService;
         this.movieService = movieService;
+        this.genreRepository = genreRepository;
     }
 
     @GetMapping()
@@ -52,9 +55,49 @@ public class MovieController {
     public String deleteId(Model model, @PathVariable Long id){
       movieService.deleteMovie(id);
       model.addAttribute("movies",movieService.findAllMovies());
-      return "videoteka/entertainment/movies.html";
+
+      //return "videoteka/entertainment/movies.html";
+        return "redirect:/api/v1/videoteka/admin-add-delete/movies";
+
     }
 
+    @GetMapping("/edit-movie/{id}")
+    public String editMovie(Model model, @PathVariable Long id,Movie movie){
+            Movie newMovie= movieService.findMoviebyId(movie.getId());
+            System.out.println(newMovie.getName());
+
+             return "redirect:/api/v1/videoteka/admin-add-delete/movies";
+    }
+
+    @GetMapping("/admin-add-delete/movies")
+    public  String addEntertainment(Model model,String keyword){
+        Movie movies = new Movie();
+        model.addAttribute("movies",movies);
+        List<Genre> genres = new ArrayList<>();
+        genreRepository.findAll().iterator().forEachRemaining(genres::add);
+        model.addAttribute("g",genres);
+        model.addAttribute("m",movieService.findByKeyword(keyword));
+
+        return "videoteka/admin/add.html";
+    }
+
+
+    @PostMapping("/admin-add-delete/movies")
+    public String submitForm(@Valid @ModelAttribute("movies") Movie movies,
+                             @RequestParam("ids") List<Genre> genres,
+                             Model model){
+
+        for(int i = 0 ; i < genres.size();i++ ){
+            movies.getGenres().add(genres.get(i));
+        }
+
+        System.out.println("Movies" + movies.getRuntime());
+
+        movieService.save(movies);
+
+
+        return "redirect:/api/v1/videoteka/admin-add-delete/movies";
+    }
 
 
 

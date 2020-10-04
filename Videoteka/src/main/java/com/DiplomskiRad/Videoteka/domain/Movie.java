@@ -1,8 +1,13 @@
 package com.DiplomskiRad.Videoteka.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
+
 
 @Entity
 @Table(name="movie")
@@ -14,10 +19,16 @@ public class Movie {
     private Long id;
 
     @Column(name = "name",unique = true)
+    @NotBlank(message = "Title can not be blank!")
+    @Size(min=2 , max = 40, message = "Title must be between 2 and 40")
     private String name;
+
     @Column(name = "year")
+    @Min(value = 1940,message = "Min year value is 1940")
     private int year;
+
     @Column(name = "runtime")
+    @Min(value=10,message = "Min runtime value is 10 min")
     private int runtime;
 
     @ManyToMany
