@@ -27,4 +27,7 @@ public interface MovieService {
 
     List<Movie>listOfMovieOnGenre(String searchGenre);
 
+    List<Movie>searchEngine(String searchGenre,String keyword);
+
+
 }

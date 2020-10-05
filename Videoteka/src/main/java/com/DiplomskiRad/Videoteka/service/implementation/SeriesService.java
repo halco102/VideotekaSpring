@@ -13,4 +13,10 @@ public interface SeriesService {
     List<Series> getAllSeriesGenres();
     void deleteById(Long id);
     void saveSeries(Series series);
+
+
+    List<Series>listOfSeriesOnGenre(String searchGenre);
+
+    List<Series>searchEngine(String searchGenre,String keyword);
+
 }

@@ -47,6 +47,12 @@ public class Cartoon {
     public Cartoon(){};
     //end const
 
+    public Cartoon(String name,int year,int seasons) {
+        this.name = name;
+        this.year = year;
+        this.seasons = seasons;
+    }
+
     //getters n setters
 
 

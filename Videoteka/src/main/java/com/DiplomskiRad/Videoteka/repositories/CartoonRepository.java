@@ -18,5 +18,14 @@ public interface CartoonRepository extends JpaRepository<Cartoon,Long> {
     List<Cartoon> getAllCartoonGenres();
 
 
+    @Query(value = "Select * from cartoon as c inner join cartoon_genre as cg" +
+            " on c.id=cg.cartoon_id inner join genre as g" +
+            " on cg.genre_id = g.id " +
+            " where g.name = :searchGenre",nativeQuery = true)
+    List<Cartoon> listOfCartoonsOnGenre(@Param("searchGenre") String searchGenre);
+
+
+
+
 
 }

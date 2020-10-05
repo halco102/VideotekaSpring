@@ -26,6 +26,7 @@ public class MovieServiceImp implements MovieService {
         return movieRepository.deleteMovieById(id);
     }
 
+
     @Override
     public Movie findMoviebyId(Long id) {
         return movieRepository.findById(id).get();
@@ -60,7 +61,6 @@ public class MovieServiceImp implements MovieService {
         System.out.println("movie saved");
     }
 
-    private String tempSearch,tempGenre;
 
     @Override
     public List<Movie> listOfMovieOnGenre(String searchGenre) {
@@ -86,5 +86,14 @@ public class MovieServiceImp implements MovieService {
     }
 
 
-
+    @Override
+    public List<Movie> searchEngine(String searchGenre, String keyword) {
+        if(keyword!=null && searchGenre == null){
+            return this.movieRepository.findByKeyword(keyword);
+        }
+        else if(keyword==null && searchGenre!=null){
+            return this.movieRepository.listOfMovieOnGenre(searchGenre);
+        }
+        return this.movieRepository.findAll();
+    }
 }

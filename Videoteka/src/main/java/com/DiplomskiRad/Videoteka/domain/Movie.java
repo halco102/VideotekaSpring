@@ -47,6 +47,7 @@ public class Movie {
             this.year=year;
             this.runtime=runtime;
         }
+
     //end Constructor
 
     //Getters n setters

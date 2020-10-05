@@ -1,22 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+<html>
 <head>
-    <link href="/css/entertainment.css" rel="stylesheet"/>
-    <meta charset="UTF-8">
-    <title>Cartoon</title>
+    <title>Cartoons</title>
+    <link href="/css/movies.css" rel="stylesheet"/>
+
 </head>
+
 <body>
-<h1>Cartoon</h1>
+<h1 style="text-align:center">Movies</h1>
 
-<div style="background-color:white;width: 80%;
-        margin: 0 auto;
-        padding: 20px;">
+<div class="nav">
+    <ul>
+        <li>
+            <a href="/api/v1/videoteka/series"> Series</a>
+        </li>
+        <li>
+            <a href="/api/v1/videoteka/movies">Movies</a>
+        </li>
+    </ul>
+</div>
 
-    <form th:action="@{/api/v1/videoteka/cartoon}" method="get">
+
+<div class="controller_div">
+
+    <form th:action="@{/api/v1/videoteka/cartoons}" method="get">
         <input id="txtSearch" type="text" name="keyword">
         <button type="submit">Go</button>
     </form>
+
+    <form th:action="@{/api/v1/videoteka/cartoons}" method="get">
+        <label class="label">Search genre</label>
+        <select id="searchGenre" name="searchGenre" >
+            <option th:each="g:${genres}" th:text="${g.name}"></option>
+        </select>
+        <button type="submit">Go</button>
+    </form>
+
 
     <table class="table">
         <tr>
@@ -26,20 +46,24 @@
             <th>Seasons</th>
             <th>Genre</th>
         </tr>
-        <tr th:each="cartoon : ${cartoons}">
-            <td th:text="${cartoon.id}"></td>
-            <td th:text="${cartoon.name}"></td>
-            <td th:text="${cartoon.year}"></td>
-            <td th:text="${cartoon.seasons}"></td>
-            <td><span th:each="genres : ${cartoon.genres}"
+        <tr th:each="cartoons : ${cartoons}">
+            <td th:text="${cartoons.id}"></td>
+            <td th:text="${cartoons.name}"></td>
+            <td th:text="${cartoons.year}"></td>
+            <td th:text="${cartoons.seasons}"></td>
+            <td><span th:each="genres : ${cartoons.genres}"
                       th:text="${genres.name + ' '}">
-            </span></td>
+          </span></td>
         </tr>
+
     </table>
 
 </div>
 
+</div>
 
 
 </body>
+
+
 </html>

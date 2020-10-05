@@ -17,4 +17,10 @@ public interface SeriesRepository extends JpaRepository<Series,Long> {
             "inner join series as s on (sg.series_id = s.id) group by s.id",nativeQuery = true)
     List<Series> getAllSeriesGenres();
 
+    @Query(value = "Select * from series as s inner join series_genre as sg" +
+            " on s.id=sg.series_id inner join genre as g" +
+            " on sg.genre_id = g.id " +
+            " where g.name = :searchGenre",nativeQuery = true)
+    List<Series> listOfSeriesOnGenre(@Param("searchGenre") String searchGenre);
+
 }
