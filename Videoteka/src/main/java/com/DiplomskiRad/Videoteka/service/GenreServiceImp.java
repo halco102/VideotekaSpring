@@ -17,6 +17,11 @@ public class GenreServiceImp implements GenreService {
     }
 
     @Override
+    public Genre findByName(String searchGenre) {
+        return this.genreRepository.findByName(searchGenre);
+    }
+
+    @Override
     public List<Genre> findAllGenre() {
         return this.genreRepository.findAll();
     }
@@ -31,4 +36,5 @@ public class GenreServiceImp implements GenreService {
     public void save(Genre genre) {
         genreRepository.save(genre);
     }
+
 }

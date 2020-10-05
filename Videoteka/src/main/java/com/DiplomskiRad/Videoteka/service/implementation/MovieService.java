@@ -25,4 +25,6 @@ public interface MovieService {
 
     void save(Movie movie);
 
+    List<Movie>listOfMovieOnGenre(String searchGenre);
+
 }

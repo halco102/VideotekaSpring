@@ -8,12 +8,35 @@
 </head>
 
 <body>
-    <div class="controller_div">
+<h1 style="text-align:center">Movies</h1>
+
+<div class="nav">
+    <ul>
+        <li>
+            <a href="/api/v1/videoteka/series"> Series</a>
+        </li>
+        <li>
+            <a href="/api/v1/videoteka/cartoon">Cartoons</a>
+        </li>
+    </ul>
+</div>
+
+
+<div class="controller_div">
 
         <form th:action="@{/api/v1/videoteka/movies}" method="get">
             <input id="txtSearch" type="text" name="keyword">
             <button type="submit">Go</button>
         </form>
+
+    <form th:action="@{/api/v1/videoteka/movies}" method="get">
+        <label class="label">Search genre</label>
+        <select id="searchGenre" name="searchGenre" >
+            <option th:each="g:${genres}" th:text="${g.name}"></option>
+        </select>
+        <button type="submit">Go</button>
+    </form>
+
 
     <table class="table">
       <tr>
@@ -31,8 +54,7 @@
           <td><span th:each="genres : ${movie.genres}"
                     th:text="${genres.name + ' '}">
           </span></td>
-          <td><a th:href="@{/api/v1/videoteka/deleteMovie/{id}(id=${movie.id})}">Delete</a></td>
-      </tr>
+           </tr>
 
   </table>
 

@@ -29,10 +29,12 @@ public class BootStrap implements CommandLineRunner {
         Movie movie = new Movie("Test1",1999,20);
         Movie movie1 = new Movie("Test2",2002,40);
         Movie movie2 = new Movie("KKK",2003,30);
+        Movie movie3 = new Movie("Test3",2004,50);
         //save movie
         movieRepository.save(movie);
         movieRepository.save(movie1);
         movieRepository.save(movie2);
+        movieRepository.save(movie3);
 
         //create genres
         Genre g1 = new Genre("g1");
@@ -55,10 +57,12 @@ public class BootStrap implements CommandLineRunner {
         movie.getGenres().addAll(Arrays.asList(g1,g2,g3));
         movie1.getGenres().addAll(Arrays.asList(g1,g3));
         movie2.getGenres().addAll(Arrays.asList(g1));
+        movie3.getGenres().addAll(Arrays.asList(g5));
         //update movie
         movieRepository.save(movie);
         movieRepository.save(movie1);
         movieRepository.save(movie2);
+        movieRepository.save(movie3);
 
         System.out.println("Bootsrap ended!");
 

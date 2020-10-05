@@ -38,10 +38,21 @@ public class MovieController {
 
     //for user
     @GetMapping("/movies")
-    public String getMovies(Model model, String keyword){
-       model.addAttribute("movies", movieService.findByKeyword(keyword));
-
-        return  "videoteka/entertainment/movies.html";
+    public String getMovies(Model model,
+                            String keyword,
+                            String searchGenre){
+        //Kasnije prepravit da logika bude u service
+        if(keyword!=null && searchGenre==null) {
+            model.addAttribute("movies", movieService.findByKeyword(keyword));
+            model.addAttribute("genres", genreService.findAllGenre());
+        }else if(keyword==null && searchGenre!=null ){
+            model.addAttribute("movies",movieService.listOfMovieOnGenre(searchGenre));
+            model.addAttribute("genres", genreService.findAllGenre());
+        }else{
+            model.addAttribute("movies",movieService.findAllMovies());
+            model.addAttribute("genres", genreService.findAllGenre());
+        }
+       return  "videoteka/entertainment/movies.html";
     }
 
     @GetMapping("/movies/{id}")
