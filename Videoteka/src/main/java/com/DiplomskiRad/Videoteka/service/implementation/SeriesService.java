@@ -11,4 +11,6 @@ public interface SeriesService {
     List<Series> findAllSeries();
     List<Series> findByKeyword(String keyword);
     List<Series> getAllSeriesGenres();
+    void deleteById(Long id);
+    void saveSeries(Series series);
 }

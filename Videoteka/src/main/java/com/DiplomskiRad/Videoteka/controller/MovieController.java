@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -37,6 +36,7 @@ public class MovieController {
         return "videoteka/index.html";
     }
 
+    //for user
     @GetMapping("/movies")
     public String getMovies(Model model, String keyword){
        model.addAttribute("movies", movieService.findByKeyword(keyword));
@@ -49,24 +49,20 @@ public class MovieController {
         model.addAttribute("movies", movieService.findMoviebyId(id));
         return "videoteka/entertainment/movies.html";
     }
+    //end
 
-
+    //for admin
     @GetMapping("/deleteMovie/{id}")
     public String deleteId(Model model, @PathVariable Long id){
       movieService.deleteMovie(id);
       model.addAttribute("movies",movieService.findAllMovies());
-
-      //return "videoteka/entertainment/movies.html";
-        return "redirect:/api/v1/videoteka/admin-add-delete/movies";
-
+      return "redirect:/api/v1/videoteka/admin-add-delete/movies";
     }
 
     @GetMapping("/edit-movie/{id}")
     public String editMovie(Model model, @PathVariable Long id,Movie movie){
             Movie newMovie= movieService.findMoviebyId(movie.getId());
-            System.out.println(newMovie.getName());
-
-             return "redirect:/api/v1/videoteka/admin-add-delete/movies";
+            return "redirect:/api/v1/videoteka/admin-add-delete/movies";
     }
 
     @GetMapping("/admin-add-delete/movies")
@@ -78,7 +74,7 @@ public class MovieController {
         model.addAttribute("g",genres);
         model.addAttribute("m",movieService.findByKeyword(keyword));
 
-        return "videoteka/admin/add.html";
+        return "videoteka/admin/add-movies.html";
     }
 
 
@@ -90,15 +86,10 @@ public class MovieController {
         for(int i = 0 ; i < genres.size();i++ ){
             movies.getGenres().add(genres.get(i));
         }
-
-        System.out.println("Movies" + movies.getRuntime());
-
         movieService.save(movies);
-
-
         return "redirect:/api/v1/videoteka/admin-add-delete/movies";
     }
-
+//end
 
 
 }

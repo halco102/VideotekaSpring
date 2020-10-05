@@ -40,4 +40,14 @@ public class SeriesServiceImp implements SeriesService {
         return seriesRepository.getAllSeriesGenres();
 
     }
+
+    @Override
+    public void deleteById(Long id) {
+        this.seriesRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveSeries(Series series) {
+        this.seriesRepository.save(series);
+    }
 }
