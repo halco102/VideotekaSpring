@@ -27,4 +27,8 @@ public class GenreServiceImp implements GenreService {
     }
 
 
+    @Override
+    public void save(Genre genre) {
+        genreRepository.save(genre);
+    }
 }

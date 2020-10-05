@@ -33,6 +33,21 @@ public class SeriesServiceImp implements SeriesService {
 
     @Override
     public List<Series> findByKeyword(String keyword) {
-        return seriesRepository.findByKeyword(keyword);
+        if(keyword!=null){return seriesRepository.findByKeyword(keyword);}
+        if(keyword==null){
+            return seriesRepository.findAll();
+        }
+        return seriesRepository.getAllSeriesGenres();
+
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        this.seriesRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveSeries(Series series) {
+        this.seriesRepository.save(series);
     }
 }

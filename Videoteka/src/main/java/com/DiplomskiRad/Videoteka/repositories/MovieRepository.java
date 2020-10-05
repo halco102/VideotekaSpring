@@ -7,10 +7,15 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 
 public interface MovieRepository extends  JpaRepository<Movie,Long> { //umjesto crud stavio sam JPA
+
+
     @Query(value = "Select * from movie as m where m.name like %:keyword% ", nativeQuery = true)
     List<Movie> findByKeyword(@Param("keyword") String keyword);
 
@@ -19,6 +24,7 @@ public interface MovieRepository extends  JpaRepository<Movie,Long> { //umjesto 
             "inner join movie as m on mg.movie_id = m.id group by m.id",nativeQuery = true)
     List<Movie> getAllMovieGenres();
 
-    //m.id,m.name,m.runtime,m.year,g.name
+    @Query(value = "Select * from movie as m where m.id = :id",nativeQuery = true)
+    Movie deleteMovieById(@Param("id") Long id);
 
 }
