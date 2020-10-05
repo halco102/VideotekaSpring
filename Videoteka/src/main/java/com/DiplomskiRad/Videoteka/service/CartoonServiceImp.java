@@ -39,6 +39,20 @@ public class CartoonServiceImp implements CartoonService {
 
     @Override
     public List<Cartoon> findByKeyword(String keyword) {
-        return cartoonRepository.findByKeyword(keyword);
+        if(keyword!=null){
+            return this.cartoonRepository.findByKeyword(keyword);
+        }
+        if(keyword==null){
+            return this.cartoonRepository.findAll();
+        }
+
+        return this.cartoonRepository.getAllCartoonGenres();
+
+
+    }
+
+    @Override
+    public void addCartoon(Cartoon cartoon) {
+        this.cartoonRepository.save(cartoon);
     }
 }

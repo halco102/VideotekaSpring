@@ -16,4 +16,6 @@ public interface CartoonService {
     List<Cartoon> findByKeyword(String keyword);
 
     List<Cartoon> getAllCartoonGenres();
+
+    void addCartoon(Cartoon cartoon);
 }

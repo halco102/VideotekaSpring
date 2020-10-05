@@ -10,13 +10,13 @@
 </head>
 
 <body>
-<h1 style="text-align:center">Add Series</h1>
+<h1 style="text-align:center">Add Cartoons</h1>
 
 <div class ="mainDiv">
     <form action="#"
-          th:action="@{/api/v1/videoteka/admin-add-delete/series}"
+          th:action="@{/api/v1/videoteka/admin-add-delete/cartoons}"
           method="post"
-          th:object="${series}"
+          th:object="${cartoons}"
     >
         <div style="padding:5px">
             <table class="table">
@@ -43,7 +43,7 @@
         </div>
         <div class="checkBoxDiv">
             <select multiple="multiple" th:name="ids" class="select">
-                <option th:each="p : ${g}" th:value="${p.id}"  th:text="${p.name}" style="text-align:center">
+                <option th:each="p : ${genre}" th:value="${p.id}"  th:text="${p.name}" style="text-align:center">
                 </option>
             </select>
         </div>
@@ -53,7 +53,7 @@
             height:30px;
             margin-top:5px;
             margin-bottom:5px;
-            text-align:center;" type="submit series">Go</button>
+            text-align:center;" type="submit cartoons">Go</button>
 
     </form>
 
@@ -67,16 +67,16 @@
             <th>Year</th>
             <th>Seasons</th>
         </tr>
-        <tr th:each="s : ${se}">
-            <td th:text="${s.id}"></td>
-            <td th:text="${s.name}"></td>
-            <td th:text="${s.year}"></td>
-            <td th:text="${s.seasons}"></td>
-            <td><span th:each="genres : ${s.genres}"
+        <tr th:each="c : ${cartoon}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.name}"></td>
+            <td th:text="${c.year}"></td>
+            <td th:text="${c.seasons}"></td>
+            <td><span th:each="genres : ${c.genres}"
                       th:text="${genres.name + ' '}">
           </span></td>
-            <td><a th:href="@{/api/v1/videoteka/delete-series/{id}(id=${s.id})}">Delete</a></td>
-            <td><a th:href="@{/api/v1/videoteka/edit-series/{id}(id=${s.id})}">Edit</a></td>
+            <td><a th:href="@{/api/v1/videoteka/delete-cartoon/{id}(id=${c.id})}">Delete</a></td>
+            <td><a th:href="@{/api/v1/videoteka/edit-caartoon/{id}(id=${c.id})}">Edit</a></td>
         </tr>
 
     </table>
