@@ -1,0 +1,23 @@
+body{
+    width: 100%;
+    background-color: azure;
+
+}
+
+.sign_in{
+    background-color:yellow;
+    padding: 10px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.button{
+    font-size: 16px;
+    padding: 6px;
+}
+
+input{
+    margin-bottom:15px;
+    display: block;
+}

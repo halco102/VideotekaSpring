@@ -1,14 +1,8 @@
 package com.DiplomskiRad.Videoteka.bootstrap;
 
 
-import com.DiplomskiRad.Videoteka.domain.Cartoon;
-import com.DiplomskiRad.Videoteka.domain.Genre;
-import com.DiplomskiRad.Videoteka.domain.Movie;
-import com.DiplomskiRad.Videoteka.domain.Series;
-import com.DiplomskiRad.Videoteka.repositories.CartoonRepository;
-import com.DiplomskiRad.Videoteka.repositories.GenreRepository;
-import com.DiplomskiRad.Videoteka.repositories.MovieRepository;
-import com.DiplomskiRad.Videoteka.repositories.SeriesRepository;
+import com.DiplomskiRad.Videoteka.domain.*;
+import com.DiplomskiRad.Videoteka.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -21,20 +15,30 @@ public class BootStrap implements CommandLineRunner {
     private final GenreRepository genreRepository;
     private final SeriesRepository seriesRepository;
     private final CartoonRepository cartoonRepository;
+    private final UserRepository userRepository;
 
     public BootStrap(MovieRepository movieRepository,
                      GenreRepository genreRepository,
                      SeriesRepository seriesRepository,
-                     CartoonRepository cartoonRepository){
+                     CartoonRepository cartoonRepository,
+                     UserRepository userRepository){
         this.movieRepository=movieRepository;
         this.genreRepository=genreRepository;
         this.seriesRepository=seriesRepository;
         this.cartoonRepository=cartoonRepository;
+        this.userRepository=userRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Bootstrap started!");
+        //create user
+            User user = new User("Admir","Halilovic","halco","123","admir@hotmail.com");
+            User user1 = new User("Admin","Admin","Admin","Admin","admin@hotmail.com");
+            userRepository.save(user);
+            userRepository.save(user1);
+
+        //ennd
 
         //create movie
         Movie movie = new Movie("Test1",1999,20);

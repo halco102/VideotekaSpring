@@ -1,4 +1,4 @@
-/*
+
 package com.DiplomskiRad.Videoteka.domain;
 
 import javax.persistence.*;
@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Table(name = "user")
 public class User {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -18,12 +19,11 @@ public class User {
     private String userName;
     @Column(name = "password")
     private String password;
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String eMail;
 
 
-    public User(Long id, String firstName, String lastName, String userName, String password, String eMail) {
-        this.id = id;
+    public User(String firstName, String lastName, String userName, String password, String eMail) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -58,7 +58,7 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return this.userName;
     }
 
     public void setUserName(String userName) {
@@ -96,4 +96,3 @@ public class User {
         return id != null ? id.hashCode() : 0;
     }
 }
-*/

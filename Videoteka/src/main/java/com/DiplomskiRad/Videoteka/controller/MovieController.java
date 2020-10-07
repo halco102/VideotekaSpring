@@ -31,7 +31,8 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @GetMapping()
+
+    @GetMapping("/index")
     public  String getIndex(){
         return "videoteka/index.html";
     }
@@ -104,6 +105,7 @@ public class MovieController {
     }
     //end update
 
+    //add new movie
     @GetMapping("/admin-add-delete/movies")
     public  String addEntertainment(Model model,String keyword){
         Movie movies = new Movie();
@@ -128,7 +130,8 @@ public class MovieController {
         movieService.save(movies);
         return "redirect:/api/v1/videoteka/admin-add-delete/movies";
     }
-//end
+    //end adding new movie
 
 
-}
+
+}//end class
