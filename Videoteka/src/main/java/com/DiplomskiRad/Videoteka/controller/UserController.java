@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping(MovieController.BASE_URL)
 public class UserController {
@@ -36,10 +38,9 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public String test2(Model model, @ModelAttribute("users") User user){
+    public String test2(Model model,@Valid @ModelAttribute("users") User user){
 
         if(userService.exists(user.getUserName(),user.getPassword())!=true){
-            System.out.println("User doesnt exist");
             return "redirect:/api/v1/videoteka/error";
         }
 
