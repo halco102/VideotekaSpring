@@ -1,19 +1,76 @@
+Today at 4:04 PM
+4:04 PM
+You sent
+37 minutes ago
 body{
-    background-color:grey;
+  width: 100%;
+/*  background-color: cornflowerblue;*/
+    /*background-color: #DFCFBE;*/
+    background-color: white;
 }
+.main_div{
+  width: 90%;
+  background-color: cyan;
+  display: flex;
+  padding: 100px;
+}
+.admin_div{
+ /* background-color: darkgreen;*/
+  flex:1;
+  margin: 10px,0px;
+  padding: 10px;
+  text-align: center;
+}
+.controller_div{
+ /* background-color: yellow;*/
+  background-color: #98B4D4;
+  flex:1;
+  padding: 20px;
+}
+form{
+  padding: 10px;
+}
+label{
+  color: wheat;
+}
+
+
 
 .table{
      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
       border-collapse: collapse;
       width: 50%;
       margin:5px auto;
-}
-
-h1{
-    text-align:center;
+      background-color:whitesmoke;
 }
 
 td,th,table{
  border:1px solid black;
  text-align:center;
+}
+.nav{
+    width:100%;
+    margin:0,auto;
+    /*background-color:blue;*/
+    background-color: #DFCFBE;
+    padding:10px;
+    text-align: center;
+}
+.search_bar{
+  padding: 10px;
+}
+.label{
+  display: inline-block;
+  text-align: right;
+  color: black;
+}
+.main_title{
+  text-align: center;
+}
+ul{
+    display:flex;
+    list-style-type: none;
+}
+li{
+    flex:1;
 }
