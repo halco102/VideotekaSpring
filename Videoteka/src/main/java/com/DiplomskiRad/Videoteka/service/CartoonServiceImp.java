@@ -55,4 +55,20 @@ public class CartoonServiceImp implements CartoonService {
     public void addCartoon(Cartoon cartoon) {
         this.cartoonRepository.save(cartoon);
     }
+
+    @Override
+    public List<Cartoon> listOfSeriesOnGenre(String searchGenre) {
+        return this.cartoonRepository.listOfCartoonsOnGenre(searchGenre);
+    }
+
+    @Override
+    public List<Cartoon> searchEngine(String searchGenre, String keyword) {
+        if(keyword!=null && searchGenre == null){
+            return this.cartoonRepository.findByKeyword(keyword);
+        }
+        else if(keyword==null && searchGenre!=null){
+            return this.cartoonRepository.listOfCartoonsOnGenre(searchGenre);
+        }
+        return this.cartoonRepository.findAll();
+    }
 }

@@ -2,21 +2,42 @@
 <html lang="en">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="/css/entertainment.css" rel="stylesheet"/>
     <meta charset="UTF-8">
     <title>Series</title>
-</head>
-<body>
-<h1>Series</h1>
+    <link href="/css/entertainment.css" rel="stylesheet"/>
 
-<div style="background-color:white;width: 80%;
-        margin: 0 auto;
-        padding: 20px;">
+</head>
+
+<body>
+<h1 style="text-align:center">Series</h1>
+
+<div class="nav">
+    <ul>
+        <li>
+            <a href="/api/v1/videoteka/movies"> Movies</a>
+        </li>
+        <li>
+            <a href="/api/v1/videoteka/cartoons">Cartoons</a>
+        </li>
+    </ul>
+</div>
+
+
+<div class="controller_div">
 
     <form th:action="@{/api/v1/videoteka/series}" method="get">
         <input id="txtSearch" type="text" name="keyword">
         <button type="submit">Go</button>
     </form>
+
+    <form th:action="@{/api/v1/videoteka/series}" method="get">
+        <label class="label">Search genre</label>
+        <select id="searchGenre" name="searchGenre" >
+            <option th:each="g:${genres}" th:text="${g.name}"></option>
+        </select>
+        <button type="submit">Go</button>
+    </form>
+
 
     <table class="table">
         <tr>
@@ -33,13 +54,20 @@
             <td th:text="${series.seasons}"></td>
             <td><span th:each="genres : ${series.genres}"
                       th:text="${genres.name + ' '}">
-            </span></td>
+          </span></td>
         </tr>
+
     </table>
+
+    </div>
 
 </div>
 
 
+</body>
+
+
+</html>
 
 </body>
 </html>

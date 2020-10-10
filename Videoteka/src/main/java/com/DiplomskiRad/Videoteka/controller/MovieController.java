@@ -8,6 +8,8 @@ import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
 import com.DiplomskiRad.Videoteka.service.implementation.MovieService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,25 +25,39 @@ public class MovieController {
 
     private final MovieService movieService;
     private final GenreService genreService;
-    private final GenreRepository genreRepository;
 
     public MovieController(MovieService movieService, GenreService genreService, GenreRepository genreRepository){
         this.genreService=genreService;
         this.movieService = movieService;
-        this.genreRepository = genreRepository;
     }
 
-    @GetMapping()
+
+    @GetMapping("/index")
     public  String getIndex(){
         return "videoteka/index.html";
     }
 
     //for user
     @GetMapping("/movies")
-    public String getMovies(Model model, String keyword){
-       model.addAttribute("movies", movieService.findByKeyword(keyword));
+    public String getMovies(Model model,
+                            String keyword,
+                            String searchGenre){
+        //Kasnije prepravit da logika bude u service
+/*        if(keyword!=null && searchGenre==null) {
+            model.addAttribute("movies", movieService.findByKeyword(keyword));
+            model.addAttribute("genres", genreService.findAllGenre());
+        }else if(keyword==null && searchGenre!=null ){
+            model.addAttribute("movies",movieService.listOfMovieOnGenre(searchGenre));
+            model.addAttribute("genres", genreService.findAllGenre());
+        }else{
+            model.addAttribute("movies",movieService.findAllMovies());
+            model.addAttribute("genres", genreService.findAllGenre());
+        }*/
 
-        return  "videoteka/entertainment/movies.html";
+        model.addAttribute("movies",movieService.searchEngine(searchGenre,keyword));
+        model.addAttribute("genres",genreService.findAllGenre());
+
+       return  "videoteka/entertainment/movies.html";
     }
 
     @GetMapping("/movies/{id}")
@@ -59,18 +75,43 @@ public class MovieController {
       return "redirect:/api/v1/videoteka/admin-add-delete/movies";
     }
 
-    @GetMapping("/edit-movie/{id}")
-    public String editMovie(Model model, @PathVariable Long id,Movie movie){
-            Movie newMovie= movieService.findMoviebyId(movie.getId());
-            return "redirect:/api/v1/videoteka/admin-add-delete/movies";
+
+    //update
+    @GetMapping("/admin-add-delete/movies/update/{id}")
+    public String editMovie(Model model, @PathVariable Long id, String keyword){
+
+            Movie updateMovies= movieService.findMoviebyId(id);
+            List<Genre> genres = new ArrayList<>();
+            genreService.findAllGenre().iterator().forEachRemaining(genres::add);
+            model.addAttribute("updateMovies",updateMovies);
+            model.addAttribute("g",genreService.findAllGenre());
+            model.addAttribute("m",movieService.findByKeyword(keyword));
+
+
+        return "videoteka/admin/edit/edit-movie.html";
     }
 
+    @PostMapping("/admin-add-delete/movies/update")
+    public String edit(Model model,
+                       @Valid @ModelAttribute("updateMovies") Movie updateMovies,
+                       @RequestParam("ids") List<Genre> genres,
+                       BindingResult result){
+
+        for(int i = 0 ; i < genres.size();i++ ){
+            updateMovies.getGenres().add(genres.get(i));
+        }
+         movieService.save(updateMovies);
+        return "redirect:/api/v1/videoteka/admin-add-delete/movies";
+    }
+    //end update
+
+    //add new movie
     @GetMapping("/admin-add-delete/movies")
     public  String addEntertainment(Model model,String keyword){
         Movie movies = new Movie();
         model.addAttribute("movies",movies);
         List<Genre> genres = new ArrayList<>();
-        genreRepository.findAll().iterator().forEachRemaining(genres::add);
+        genreService.findAllGenre().iterator().forEachRemaining(genres::add);
         model.addAttribute("g",genres);
         model.addAttribute("m",movieService.findByKeyword(keyword));
 
@@ -89,7 +130,8 @@ public class MovieController {
         movieService.save(movies);
         return "redirect:/api/v1/videoteka/admin-add-delete/movies";
     }
-//end
+    //end adding new movie
 
 
-}
+
+}//end class

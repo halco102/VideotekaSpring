@@ -3,9 +3,12 @@ package com.DiplomskiRad.Videoteka.service;
 import com.DiplomskiRad.Videoteka.domain.Genre;
 import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.repositories.MovieRepository;
+import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
 import com.DiplomskiRad.Videoteka.service.implementation.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -13,7 +16,6 @@ import java.util.List;
 public class MovieServiceImp implements MovieService {
 
     private final MovieRepository movieRepository;
-
 
     public MovieServiceImp(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
@@ -24,6 +26,7 @@ public class MovieServiceImp implements MovieService {
         return movieRepository.deleteMovieById(id);
     }
 
+
     @Override
     public Movie findMoviebyId(Long id) {
         return movieRepository.findById(id).get();
@@ -32,21 +35,6 @@ public class MovieServiceImp implements MovieService {
     @Override
     public List<Movie> findAllMovies() {
         return movieRepository.findAll();
-    }
-
-    @Override
-    public List<Movie> findByKeyword(String keyword) {
-
-        //return movieRepository.findByKeyword(keyword);
-        if(keyword!=null){
-            return this.movieRepository.findByKeyword(keyword);
-        }
-        if(keyword==null){
-            return this.movieRepository.findAll();
-        }
-
-        return this.movieRepository.getAllMovieGenres();
-
     }
 
     @Override
@@ -71,5 +59,41 @@ public class MovieServiceImp implements MovieService {
     public void save(Movie movie) {
         movieRepository.save(movie);
         System.out.println("movie saved");
+    }
+
+
+    @Override
+    public List<Movie> listOfMovieOnGenre(String searchGenre) {
+        if(searchGenre!=null){
+            return movieRepository.listOfMovieOnGenre(searchGenre);
+        }
+        return this.movieRepository.findAll();
+    }
+
+    @Override
+    public List<Movie> findByKeyword(String keyword) {
+
+        //return movieRepository.findByKeyword(keyword);
+        if(keyword!=null){
+            return this.movieRepository.findByKeyword(keyword);
+        }
+        if(keyword==null){
+            return this.movieRepository.findAll();
+        }
+
+        return this.movieRepository.getAllMovieGenres();
+
+    }
+
+
+    @Override
+    public List<Movie> searchEngine(String searchGenre, String keyword) {
+        if(keyword!=null && searchGenre == null){
+            return this.movieRepository.findByKeyword(keyword);
+        }
+        else if(keyword==null && searchGenre!=null){
+            return this.movieRepository.listOfMovieOnGenre(searchGenre);
+        }
+        return this.movieRepository.findAll();
     }
 }

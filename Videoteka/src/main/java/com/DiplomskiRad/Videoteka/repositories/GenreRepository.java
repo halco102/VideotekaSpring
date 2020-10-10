@@ -10,4 +10,7 @@ import java.util.List;
 
 public interface GenreRepository extends JpaRepository<Genre,Long> {
 
+    @Query(value = "Select * from genre as g where g.name = :searchGenre",nativeQuery = true)
+    Genre findByName(@Param("searchGenre") String searchGenre);
+
 }

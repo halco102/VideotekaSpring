@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="/css/login.css" rel="stylesheet"/>
+</head>
+<body>
+<h1 style="text-align:center">Login</h1>
+
+<div class="sign_in">
+    <form action="#" th:action="@{/api/v1/videoteka/register}" method="post" th:object="${users}">
+        <label>Username</label>
+        <input type="text" th:field="*{userName}">
+
+        <label>Password</label>
+        <input type="password" th:field="*{password}">
+
+
+        <button type="submit" class="button">Login</button>
+
+        <button type="submit"class="button">Create account</button>
+
+    </form>
+</div>
+
+</body>
+</html>

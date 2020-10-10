@@ -77,7 +77,7 @@
                       th:text="${genres.name + ' '}">
           </span></td>
             <td><a th:href="@{/api/v1/videoteka/deleteMovie/{id}(id=${movie.id})}">Delete</a></td>
-            <td><a th:href="@{/api/v1/videoteka/edit-movie/{id}(id=${movie.id})}">Edit</a></td>
+            <td><a th:href="@{/api/v1/videoteka/admin-add-delete/movies/update/{id}(id=${movie.id})}">Edit</a></td>
         </tr>
 
     </table>

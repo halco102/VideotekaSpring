@@ -8,6 +8,7 @@ public interface GenreService {
 
     List<Genre> findAllGenre();
     Genre findGenreById(Long id);
+    Genre findByName(String searchGenre);
 
     //new
 

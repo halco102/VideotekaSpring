@@ -50,4 +50,21 @@ public class SeriesServiceImp implements SeriesService {
     public void saveSeries(Series series) {
         this.seriesRepository.save(series);
     }
+
+    @Override
+    public List<Series> listOfSeriesOnGenre(String searchGenre) {
+        return seriesRepository.listOfSeriesOnGenre(searchGenre);
+    }
+
+    @Override
+    public List<Series> searchEngine(String searchGenre, String keyword) {
+        if(keyword!=null && searchGenre == null){
+            return this.seriesRepository.findByKeyword(keyword);
+        }
+        else if(keyword==null && searchGenre!=null){
+            return this.seriesRepository.listOfSeriesOnGenre(searchGenre);
+        }
+        return this.seriesRepository.findAll();
+    }
+
 }

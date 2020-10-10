@@ -28,13 +28,9 @@ public class CartoonController {
     }
 
     @GetMapping("/cartoons")
-    public String getCartoons(Model model,String keyword){
-        if(keyword!=null){
-            model.addAttribute("cartoons", cartoonService.findByKeyword(keyword));
-        }else {
-            model.addAttribute("cartoons", cartoonService.findAllCartoons());
-            model.addAttribute("cartoons",cartoonService.getAllCartoonGenres());
-        }
+    public String getCartoons(Model model,String keyword,String searchGenre){
+        model.addAttribute("cartoons",this.cartoonService.searchEngine(searchGenre,keyword));
+        model.addAttribute("genres",this.genreService.findAllGenre());
 
         return "videoteka/entertainment/cartoon.html";
     }
