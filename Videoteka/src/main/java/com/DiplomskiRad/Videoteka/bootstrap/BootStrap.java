@@ -35,6 +35,7 @@ public class BootStrap implements CommandLineRunner {
         //create user
             User user = new User("Admir","Halilovic","halco","123","admir@hotmail.com");
             User user1 = new User("Admin","Admin","Admin","Admin","admin@hotmail.com");
+            User user2 = new User("Lejla","Bandic","weejws","222","lejla@hotmail.com");
             userRepository.save(user);
             userRepository.save(user1);
 

@@ -30,7 +30,9 @@ public class Authentication extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("halco").password(passwordEncoder().encode("123")).roles("USER")
                 .and()
-                .withUser("admin").password(passwordEncoder().encode("111")).roles("ADMIN","USER");
+                .withUser("admin").password(passwordEncoder().encode("111")).roles("ADMIN","USER")
+                .and()
+                .withUser("weejws").password(passwordEncoder().encode("222")).roles("USER");
     }
 
     @Bean
@@ -57,8 +59,8 @@ public class Authentication extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/api/v1/videoteka/login")
                 .usernameParameter("userName").passwordParameter("password")
-                .defaultSuccessUrl("/api/v1/videoteka/index",true)
-                .failureUrl("/api/v1/videoteka/error");
+                .defaultSuccessUrl("/api/v1/videoteka/index",true);
+               // .failureUrl("/api/v1/videoteka/error");
 
          }
 

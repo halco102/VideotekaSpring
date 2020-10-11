@@ -32,12 +32,12 @@ public class UserController {
         return "videoteka/login/sign-in.html";
     }
 
-
+/*
     @GetMapping("/error")
     public String userDoesNotExist(){
         return "videoteka/login/error.html";
     }
-
+*/
 
     @PostMapping("/login")
     public String register(Model model,@Valid @ModelAttribute("users") User user){

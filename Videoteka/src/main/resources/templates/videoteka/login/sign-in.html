@@ -17,6 +17,9 @@
         <label>Password</label>
         <input type="password" th:field="*{password}">
 
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
 
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
