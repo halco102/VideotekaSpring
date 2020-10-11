@@ -12,7 +12,6 @@ public class StarServiceImp implements StarService {
 
     private final StarRepository starRepository;
 
-
     public StarServiceImp(StarRepository starRepository) {
         this.starRepository = starRepository;
     }

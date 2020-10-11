@@ -9,7 +9,8 @@
 <h1 style="text-align:center">Login</h1>
 
 <div class="sign_in">
-    <form action="#" th:action="@{/api/v1/videoteka/register}" method="post" th:object="${users}">
+    <form action="#" method="post" th:object="${users}" th:action="@{/api/v1/videoteka/login}"  >
+
         <label>Username</label>
         <input type="text" th:field="*{userName}">
 
@@ -17,9 +18,10 @@
         <input type="password" th:field="*{password}">
 
 
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
         <button type="submit" class="button">Login</button>
 
-        <button type="submit"class="button">Create account</button>
 
     </form>
 </div>

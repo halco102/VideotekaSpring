@@ -30,6 +30,17 @@ public class UserServiceImp implements UserService {
         return userRepository.findAll();
     }
 
+    /*
+    * primas LoginDto (username and password) ili UserDto koji vec ima password ili ne
+    *
+    * if findByUsername !)   da li je on pronadjenog Usera jednak password iy DTO koji poslan
+    *
+    * ako jeste saljes objekta
+    *
+    * ako ne Bad credentials
+    *
+    * */
+
     @Override
     public User checkIfUserIsInDatabase(String username, String password) {
         return userRepository.checkIfUserIsInDatabase(username,password);
