@@ -2,9 +2,8 @@
 package com.DiplomskiRad.Videoteka.domain;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -39,6 +38,12 @@ public class User {
         this.eMail = eMail;
     }
 
+    @ManyToMany
+    @JoinTable(name="user_role",joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    Set<Role> roleSet = new HashSet<>();
+
+
     public User(){}
 
     public Long getId() {
@@ -47,6 +52,14 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<Role> getUserRoleSet() {
+        return roleSet;
+    }
+
+    public void setUserRoleSet(Set<Role> roleSet) {
+        this.roleSet = roleSet;
     }
 
     public String getFirstName() {

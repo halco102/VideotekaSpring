@@ -16,26 +16,39 @@ public class BootStrap implements CommandLineRunner {
     private final SeriesRepository seriesRepository;
     private final CartoonRepository cartoonRepository;
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     public BootStrap(MovieRepository movieRepository,
                      GenreRepository genreRepository,
                      SeriesRepository seriesRepository,
                      CartoonRepository cartoonRepository,
-                     UserRepository userRepository){
+                     UserRepository userRepository,
+                     RoleRepository roleRepository){
         this.movieRepository=movieRepository;
         this.genreRepository=genreRepository;
         this.seriesRepository=seriesRepository;
         this.cartoonRepository=cartoonRepository;
         this.userRepository=userRepository;
+        this.roleRepository=roleRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Bootstrap started!");
+        Role role = new Role("ADMIN");
+        Role role1 = new Role("USER");
+        roleRepository.save(role);
+        roleRepository.save(role1);
         //create user
             User user = new User("Admir","Halilovic","halco","123","admir@hotmail.com");
             User user1 = new User("Admin","Admin","Admin","Admin","admin@hotmail.com");
-            User user2 = new User("Lejla","Bandic","weejws","222","lejla@hotmail.com");
+            //User user2 = new User("Lejla","Bandic","weejws","222","lejla@hotmail.com");
+            userRepository.save(user);
+            userRepository.save(user1);
+
+            user.getUserRoleSet().add(role);
+            user1.getUserRoleSet().add(role1);
+
             userRepository.save(user);
             userRepository.save(user1);
 
