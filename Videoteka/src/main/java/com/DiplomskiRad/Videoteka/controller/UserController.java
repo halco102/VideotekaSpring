@@ -3,6 +3,7 @@ package com.DiplomskiRad.Videoteka.controller;
 
 import com.DiplomskiRad.Videoteka.domain.User;
 import com.DiplomskiRad.Videoteka.service.implementation.UserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +43,10 @@ public class UserController {
     @PostMapping("/login")
     public String register(Model model,@Valid @ModelAttribute("users") User user){
 
-        System.out.println("USERNAME " + user.getUserName());
+        String encodedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        userService.save(user);
+
         if(userService.exists(user.getUserName(),user.getPassword())!=true){
             return "redirect:/api/v1/videoteka/error";
         }

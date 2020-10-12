@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImp implements UserService {
@@ -20,7 +21,16 @@ public class UserServiceImp implements UserService {
         this.userRepository=userRepository;
     }
 
+    @Override
+    public Optional<User> findUserByUserName(String userName) {
+        return this.userRepository.findUserByUserName(userName);
+    }
 
+    @Override
+    public User save(User user) {
+        System.out.println("User saved!");
+        return this.userRepository.save(user);
+    }
 
     @Override
     public User findUserById(Long id) {

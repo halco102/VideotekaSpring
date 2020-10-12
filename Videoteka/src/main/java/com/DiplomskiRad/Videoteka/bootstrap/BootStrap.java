@@ -133,7 +133,7 @@ public class BootStrap implements CommandLineRunner {
         cartoonRepository.save(cartoon2);
         cartoonRepository.save(cartoon3);
 
-
+        
         System.out.println("Bootsrap ended!");
 
 
