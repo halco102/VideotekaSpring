@@ -56,7 +56,6 @@ public class Authentication extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-
                 .authorizeRequests()
                 .antMatchers("/api/v1/videoteka/login").permitAll()
                 .antMatchers("/api/v1/videoteka/error").permitAll()
@@ -64,7 +63,7 @@ public class Authentication extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/videoteka/movies").permitAll()
                 .antMatchers("/api/v1/videoteka/series").permitAll()
                 .antMatchers("/api/v1/videoteka/cartoons").permitAll()
-                .antMatchers("/api/v1/videoteka/index").permitAll()
+                .antMatchers("/api/v1/videoteka/index").hasRole("USER")
                 .antMatchers("/css/**").permitAll()
                 .anyRequest().authenticated()
                 .and()

@@ -17,4 +17,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     Optional<User> findUserByUserName(String userName);
 
+    @Query(value = "Select role from user as u inner join user_role as ur on u.id = ur.user_id inner join role as r on ur.role_id = r.id ",nativeQuery = true)
+    String findRole();
+
 }

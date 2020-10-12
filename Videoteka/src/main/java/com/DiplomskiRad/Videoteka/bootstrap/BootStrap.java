@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 @Component
 public class BootStrap implements CommandLineRunner {
-
+/*
     private final MovieRepository movieRepository;
     private final GenreRepository genreRepository;
     private final SeriesRepository seriesRepository;
@@ -30,10 +30,18 @@ public class BootStrap implements CommandLineRunner {
         this.cartoonRepository=cartoonRepository;
         this.userRepository=userRepository;
         this.roleRepository=roleRepository;
+    }*/
+
+    private UserRepository userRepository;
+    public BootStrap(UserRepository userRepository){
+        this.userRepository=userRepository;
     }
 
     @Override
     public void run(String... args) throws Exception {
+
+        System.out.println("User role " + this.userRepository.findRole());
+        /*
         System.out.println("Bootstrap started!");
         Role role = new Role("ADMIN");
         Role role1 = new Role("USER");
@@ -136,7 +144,7 @@ public class BootStrap implements CommandLineRunner {
 
         
         System.out.println("Bootsrap ended!");
-
+    */
 
     }
 }
