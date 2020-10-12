@@ -1,0 +1,43 @@
+create table user_role (
+	id int auto_increment primary key not null,
+    user_id int,
+    role_id int,
+    foreign key(user_id) references user(id),
+    foreign key(role_id) references role(id)
+
+)Engine=InnoDB;
+
+
+create table role (
+	id int auto_increment primary key not null,
+    role nvarchar(10)
+)Engine=InnoDB;
+
+insert into role(role) values ('ADMIN');
+insert into role(role) values ('USER');
+
+
+create trigger set_user_role 
+after insert
+on user for each row 
+insert into user_role set
+user_id=new.id,
+role_id=2;
+
+delete from user_role where id > 0;
+alter table user_role auto_increment=1;
+delete from user where id>0;
+alter table user auto_increment=1;
+
+Select * from user as u inner join user_role as ur on u.id = ur.user_id inner join role as r on ur.role_id = r.id; 
+
+drop trigger set_user_role;
+
+
+select * from user;
+Select * from role;
+select * from user_role;
+
+insert into user (username) values ('test1');
+
+
