@@ -3,6 +3,9 @@ package com.DiplomskiRad.Videoteka.service;
 import com.DiplomskiRad.Videoteka.domain.User;
 import com.DiplomskiRad.Videoteka.repositories.UserRepository;
 import com.DiplomskiRad.Videoteka.service.implementation.UserService;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +15,12 @@ public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;
 
+
     public UserServiceImp(UserRepository userRepository){
         this.userRepository=userRepository;
     }
+
+
 
     @Override
     public User findUserById(Long id) {

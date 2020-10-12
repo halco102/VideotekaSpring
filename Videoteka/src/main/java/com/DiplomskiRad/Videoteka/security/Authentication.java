@@ -1,10 +1,12 @@
 package com.DiplomskiRad.Videoteka.security;
 
 
+import com.DiplomskiRad.Videoteka.service.UserServiceImp;
 import com.DiplomskiRad.Videoteka.service.implementation.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,16 +26,20 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class Authentication extends WebSecurityConfigurerAdapter {
 
-
+    @Autowired
+    UserServiceImp userService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
+
+/*        auth.inMemoryAuthentication()
                 .withUser("halco").password(passwordEncoder().encode("123")).roles("USER")
                 .and()
                 .withUser("admin").password(passwordEncoder().encode("111")).roles("ADMIN","USER")
                 .and()
-                .withUser("weejws").password(passwordEncoder().encode("222")).roles("USER");
+                .withUser("weejws").password(passwordEncoder().encode("222")).roles("USER");    hardcoded users*/
+
+
     }
 
     @Bean
