@@ -32,15 +32,9 @@ public class BootStrap implements CommandLineRunner {
         this.roleRepository=roleRepository;
     }*/
 
-    private UserRepository userRepository;
-    public BootStrap(UserRepository userRepository){
-        this.userRepository=userRepository;
-    }
-
     @Override
     public void run(String... args) throws Exception {
 
-        System.out.println("User role " + this.userRepository.findRole());
         /*
         System.out.println("Bootstrap started!");
         Role role = new Role("ADMIN");

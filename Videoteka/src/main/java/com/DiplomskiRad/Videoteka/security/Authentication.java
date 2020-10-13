@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,7 +29,6 @@ public class Authentication extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
 
         auth
                 .userDetailsService(customUserDetails)
@@ -63,16 +63,16 @@ public class Authentication extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/videoteka/movies").permitAll()
                 .antMatchers("/api/v1/videoteka/series").permitAll()
                 .antMatchers("/api/v1/videoteka/cartoons").permitAll()
-                .antMatchers("/api/v1/videoteka/index").hasRole("USER")
+                .antMatchers("/api/v1/videoteka/index").hasAuthority("USER")
                 .antMatchers("/css/**").permitAll()
-                .anyRequest().authenticated()
+                //.anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/api/v1/videoteka/login")
                 .usernameParameter("userName").passwordParameter("password")
                 .defaultSuccessUrl("/api/v1/videoteka/index",true);
                // .failureUrl("/api/v1/videoteka/error");
-
+            http.csrf().disable();
          }
 
     @Override
