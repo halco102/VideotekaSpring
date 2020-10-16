@@ -4,6 +4,7 @@ package com.DiplomskiRad.Videoteka.domain;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 public class User {
+
 
     @Id
     @Column(name="id")

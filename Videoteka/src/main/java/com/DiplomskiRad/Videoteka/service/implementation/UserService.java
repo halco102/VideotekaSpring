@@ -20,4 +20,11 @@ public interface UserService {
 
     User save(User user);
 
+    Boolean checkIfPasswordMach(String password,String repeatPassword);
+
+    boolean checkEmail(String email);
+
+    boolean checkIfUsernameExists(String username);
+
+    boolean validation(String username, String email, String password, String repeatPassword);
 }

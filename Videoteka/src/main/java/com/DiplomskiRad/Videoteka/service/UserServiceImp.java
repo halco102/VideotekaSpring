@@ -22,6 +22,47 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public boolean checkIfUsernameExists(String username) {
+        if(this.userRepository.checkUsername(username)!=null){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean checkEmail(String email) {
+        if(this.userRepository.checkEmail(email)!=null){
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    @Override
+    public boolean validation(String username,String email,String password,String repeatPassword){
+        if(checkIfUsernameExists(username) == false
+                && checkEmail(email) == false
+                && checkIfPasswordMach(password,repeatPassword)==true){
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public Boolean checkIfPasswordMach(String password, String repeatPassword) {
+        if(password.equals(repeatPassword)){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
     public Optional<User> findUserByUserName(String userName) {
         return this.userRepository.findUserByUserName(userName);
     }
