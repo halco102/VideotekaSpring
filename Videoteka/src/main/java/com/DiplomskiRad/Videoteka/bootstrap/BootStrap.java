@@ -17,19 +17,22 @@ public class BootStrap implements CommandLineRunner {
     private final CartoonRepository cartoonRepository;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final StarRepository starRepository;
 
     public BootStrap(MovieRepository movieRepository,
                      GenreRepository genreRepository,
                      SeriesRepository seriesRepository,
                      CartoonRepository cartoonRepository,
                      UserRepository userRepository,
-                     RoleRepository roleRepository){
+                     RoleRepository roleRepository,
+                     StarRepository starRepository){
         this.movieRepository=movieRepository;
         this.genreRepository=genreRepository;
         this.seriesRepository=seriesRepository;
         this.cartoonRepository=cartoonRepository;
         this.userRepository=userRepository;
         this.roleRepository=roleRepository;
+        this.starRepository=starRepository;
     }
 
     @Override
