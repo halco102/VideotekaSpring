@@ -1,35 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Create account</title>
         <link href="/css/create-account.css" rel="stylesheet"/>
+        <style>
+            .error{
+             color:#ff0000;
+             font-weight:bold;
+             margin-bottom:5px;
+            }
+        </style>
     </head>
 
     <body>
         <div class="form-main">
-            <form>
+            <form action="#" th:action="@{/api/v1/videoteka/create-account}" th:object="${users}" method="post">
                 <label>First name</label>
-                <input type="text">
+                <input type="text" th:field="*{firstName}">
+                <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></div>
 
                 <label>Last name</label>
-                <input type="text">
+                <input type="text" th:field="*{lastName}">
+                <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></div>
 
 
                 <label>Username</label>
-                <input type="text">
+                <input type="text" th:field="*{userName}">
+                <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="error"></div>
 
                 <label>Password</label>
-                <input type="text">
+                <input type="text" th:field="*{password}">
+                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
 
 
                 <label>Repeat password</label>
-                <input type="text">
+                <input type="text" th:field="*{confirmPassword}">
+                <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="error"></div>
 
                 <label>Email</label>
-                <input type="text"><br>
+                <input type="text" th:field="*{eMail}">
+                <div th:if="${#fields.hasErrors('eMail')}" th:errors="*{eMail}" class="error"></div>
+                <br>
 
                 <button type="submit">Create account</button>
             </form>
+        </div>
+
+        <div th:object="${message}">
+                <p th:value="${message}"></p>
         </div>
 
         <div class="question">

@@ -38,11 +38,15 @@ public class CustomUserDetails implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+
+
         User user = userService.findUserByUserName(userName).orElseThrow(() -> new UsernameNotFoundException("Username " + userName + " not found!"));
+
         return new org.springframework.security.core.userdetails.User(user.getUserName(), passwordEncoder.encode(user.getPassword()),getAuthorities(user));
     }
 
     private static Collection<? extends GrantedAuthority> getAuthorities (User user){
+
 
         String[] userRoles = user.getUserRoleSet().stream().map((role) -> role.getRole()).toArray(String[]::new);
 //        Collection<GrantedAuthority> autorities = AuthorityUtils.createAuthorityList(userRoles);

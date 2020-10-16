@@ -34,6 +34,7 @@ public class Authentication extends WebSecurityConfigurerAdapter {
                 .userDetailsService(customUserDetails)
                 .passwordEncoder(passwordEncoder());
 
+
         /*
         * U user tabeli treba dodati odma na 1 mjestu admin i dodijelit mu u User_Role tabeli admin privilegiju
         * svaki ostali account dodijelit vrijednost (2) user i napraviti u db Trigger koji ce automatski
@@ -63,7 +64,7 @@ public class Authentication extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/videoteka/movies").permitAll()
                 .antMatchers("/api/v1/videoteka/series").permitAll()
                 .antMatchers("/api/v1/videoteka/cartoons").permitAll()
-                .antMatchers("/api/v1/videoteka/index").hasAuthority("USER")
+                .antMatchers("/api/v1/videoteka/index").hasAnyAuthority("USER","ADMIN") //provjerava da li ulogovani acc ima authority na ovoj domeni
                 .antMatchers("/api/v1/videoteka/create-account").permitAll()
                 .antMatchers("/css/**").permitAll()
                 //.anyRequest().authenticated()

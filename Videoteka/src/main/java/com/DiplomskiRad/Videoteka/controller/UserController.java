@@ -3,15 +3,13 @@ package com.DiplomskiRad.Videoteka.controller;
 
 import com.DiplomskiRad.Videoteka.domain.User;
 import com.DiplomskiRad.Videoteka.service.implementation.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @Controller
@@ -61,15 +59,25 @@ public class UserController {
     //end Login
 
     @GetMapping("/create-account")
-    public String createAccount(){
+    public String createAccount(Model model){
+        User user = new User();
+        model.addAttribute("users",user);
         return "videoteka/login/create-account.html";
     }
 
 
     @PostMapping("/create-account")
-    public String createAccount(@ModelAttribute("users") User user,Model model){
-
-        return null;
+    public String createAccount(  @ModelAttribute("users") @Valid User user,
+                                  BindingResult result,
+                                  Model model){
+        //provjeriti da li postoji user u bazi, ako postoji baci error ako ne nastavi dalje sa pregledom, tj provjeri jel
+        //email validan ili je vec koji postoji u bazi
+        if(result.hasErrors()){
+            return "videoteka/login/create-account.html";
+        }else {
+            System.out.println(user.getFirstName());
+            return "redirect:/api/v1/videoteka/login";
+        }
     }
 
 
