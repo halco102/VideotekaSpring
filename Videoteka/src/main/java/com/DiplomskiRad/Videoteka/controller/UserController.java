@@ -62,6 +62,7 @@ public class UserController {
     public String createAccount(Model model){
         User user = new User();
         model.addAttribute("users",user);
+
         return "videoteka/login/create-account.html";
     }
 
@@ -75,7 +76,6 @@ public class UserController {
         if(result.hasErrors()){
             return "videoteka/login/create-account.html";
         }else {
-            System.out.println(user.getFirstName());
             return "redirect:/api/v1/videoteka/login";
         }
     }
