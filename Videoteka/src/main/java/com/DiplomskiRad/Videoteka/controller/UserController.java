@@ -24,6 +24,10 @@ public class UserController {
         this.userService=userService;
     }
 
+    @GetMapping("")
+    public String getLogin(){
+        return "redirect:/api/v1/videoteka/login";
+    }
 
     //Login of user
     @GetMapping("/login")
@@ -55,6 +59,12 @@ public class UserController {
 
     }
     //end Login
+
+    @GetMapping("/create-account")
+    public String createAccount(){
+        return "videoteka/login/create-account.html";
+    }
+
 
     @PostMapping("/create-account")
     public String createAccount(@ModelAttribute("users") User user,Model model){

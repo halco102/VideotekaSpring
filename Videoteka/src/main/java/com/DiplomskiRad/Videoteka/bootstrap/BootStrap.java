@@ -30,8 +30,8 @@ public class BootStrap implements CommandLineRunner {
         this.cartoonRepository=cartoonRepository;
         this.userRepository=userRepository;
         this.roleRepository=roleRepository;
-    }*/
-
+    }
+*/
     @Override
     public void run(String... args) throws Exception {
 
