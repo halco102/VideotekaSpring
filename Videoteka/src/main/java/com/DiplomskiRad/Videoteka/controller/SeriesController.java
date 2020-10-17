@@ -55,12 +55,6 @@ public class SeriesController {
         return "redirect:/api/v1/videoteka/admin-add-delete/series";
     }
 
-    @GetMapping("/edit-series/{id}")
-    public String editMovie(Model model, @PathVariable Long id, Movie movie){
-        //Movie newMovie= movieService.findMoviebyId(movie.getId());
-        return "redirect:/api/v1/videoteka/admin-add-delete/movies";
-    }
-
     @GetMapping("/admin-add-delete/series")
     public  String addEntertainment(Model model,String keyword){
         Series series= new Series();
@@ -74,8 +68,23 @@ public class SeriesController {
     }
 
 
-    @PostMapping("/admin-add-delete/series")
-    public String submitForm(@Valid @ModelAttribute("series") Series series,
+//update
+    @GetMapping("/admin-add-delete/series/update/{id}")
+    public String editSeries(Model model, @PathVariable Long id, Movie movie, String keyword){
+        Series updateMovies= seriesService.findSeriesById(id);
+        List<Genre> genres = new ArrayList<>();
+        genreService.findAllGenre().iterator().forEachRemaining(genres::add);
+        model.addAttribute("updateSeries",updateMovies);
+        model.addAttribute("g",genreService.findAllGenre());
+        model.addAttribute("m",seriesService.findByKeyword(keyword));
+
+        return "videoteka/admin/edit/edit-series.html";
+    }
+
+
+
+    @PostMapping("/admin-add-delete/series/update")
+    public String submitForm(@Valid @ModelAttribute("updateSeries") Series series,
                              @RequestParam("ids") List<Genre> genres,
                              Model model){
 
@@ -85,7 +94,7 @@ public class SeriesController {
         seriesService.saveSeries(series);
         return "redirect:/api/v1/videoteka/admin-add-delete/series";
     }
-//end
+//end update
 
 
 

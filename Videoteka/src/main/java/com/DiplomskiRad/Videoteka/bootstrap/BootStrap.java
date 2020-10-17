@@ -129,13 +129,14 @@ public class BootStrap implements CommandLineRunner {
         Creator creator3 = new Creator("test4","test4");
 
         creator.setCountry(country);
-
-        System.out.println(creator.getCountry().getCountryName());
+        creator1.setCountry(country1);
+        creator2.setCountry(country2);
 
         creatorRepository.save(creator);
         creatorRepository.save(creator1);
         creatorRepository.save(creator2);
         creatorRepository.save(creator3);
+
 
 
         Cartoon cartoon = new Cartoon("Test1",1999,20);

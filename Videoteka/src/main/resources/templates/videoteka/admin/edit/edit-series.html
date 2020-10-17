@@ -10,20 +10,20 @@
 </head>
 
 <body>
-<h1 style="text-align:center">Edit</h1>
+<h1 style="text-align:center">Edit Series</h1>
 
 <div class ="mainDiv">
     <form action="#"
-          th:action="@{/api/v1/videoteka/admin-add-delete/movies/update}"
+          th:action="@{/api/v1/videoteka/admin-add-delete/series/update}"
           method="post"
-          th:object="${updateMovies}"
+          th:object="${updateSeries}"
     >
         <div style="padding:5px">
             <table class="table">
                 <tr>
                     <th>Title</th>
                     <th>Year</th>
-                    <th>Runtime</th>
+                    <th>Seasons</th>
                 </tr>
 
                 <tr >
@@ -37,7 +37,7 @@
                         <input type="text" th:field="*{year}">
                     </td>
                     <td>
-                        <input type="text" th:field="*{runtime}">
+                        <input type="text" th:field="*{seasons}">
                     </td>
                 </tr>
 

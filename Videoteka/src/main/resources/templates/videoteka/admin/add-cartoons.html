@@ -92,7 +92,7 @@
                       th:text="${genres.name + ' '}">
           </span></td>
             <td><a th:href="@{/api/v1/videoteka/delete-cartoon/{id}(id=${c.id})}">Delete</a></td>
-            <td><a th:href="@{/api/v1/videoteka/edit-caartoon/{id}(id=${c.id})}">Edit</a></td>
+            <td><a th:href="@{/api/v1/videoteka/admin-add-delete/cartoons/update/{id}(id=${c.id})}">Edit</a></td>
         </tr>
 
     </table>

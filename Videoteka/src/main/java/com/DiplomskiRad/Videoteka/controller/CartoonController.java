@@ -55,11 +55,6 @@ public class CartoonController {
         return "redirect:/api/v1/videoteka/admin-add-delete/cartoons";
     }
 
-    @GetMapping("/edit-cartoon/{id}")
-    public String editMovie(Model model, @PathVariable Long id, Movie movie){
-        //Movie newMovie= movieService.findMoviebyId(movie.getId());
-        return "redirect:/api/v1/videoteka/admin-add-delete/movies";
-    }
 
     @GetMapping("/admin-add-delete/cartoons")
     public  String addEntertainment(Model model,String keyword){
@@ -74,8 +69,23 @@ public class CartoonController {
     }
 
 
-    @PostMapping("/admin-add-delete/cartoons")
-    public String submitForm(@Valid @ModelAttribute("cartoons")Cartoon cartoon,
+
+    @GetMapping("/admin-add-delete/cartoons/update/{id}")
+    public String editMovie(Model model, @PathVariable Long id, Movie movie, String keyword){
+
+        Cartoon updateCartoons= cartoonService.findCartoonById(id);
+        List<Genre> genres = new ArrayList<>();
+        genreService.findAllGenre().iterator().forEachRemaining(genres::add);
+        model.addAttribute("updateCartoons",updateCartoons);
+        model.addAttribute("g",genreService.findAllGenre());
+        model.addAttribute("c",cartoonService.findByKeyword(keyword));
+
+
+        return "videoteka/admin/edit/edit-cartoon.html";
+    }
+
+    @PostMapping("/admin-add-delete/cartoons/update")
+    public String edit(@Valid @ModelAttribute("updateCartoons")Cartoon cartoon,
                              @RequestParam("ids") List<Genre> genres,
                              Model model){
 

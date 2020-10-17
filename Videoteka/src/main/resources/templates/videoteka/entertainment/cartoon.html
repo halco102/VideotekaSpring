@@ -64,7 +64,9 @@
                       th:text="${creators.firstName + ' ' + creators.lastName + ',' + ' '}">
           </span></td>
             <td><span th:each="creators : ${cartoons.creators}"
-                      th:text="${creator.getCountry().getCountryName()}">
+                      ><span th:each="country : ${creators.country}"
+                        th:text="${country.countryName}">
+                        </span>
           </span></td>
         </tr>
 
