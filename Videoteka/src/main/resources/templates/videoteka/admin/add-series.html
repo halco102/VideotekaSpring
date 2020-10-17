@@ -12,6 +12,21 @@
 <body>
 <h1 style="text-align:center">Add Series</h1>
 
+
+<div class="nav">
+    <ul>
+        <li>
+            <a href="/api/v1/videoteka/admin-add-delete/movies">Movies</a>
+        </li>
+        <li>
+            <a href="/api/v1/videoteka/admin-add-delete/cartoons">Cartoons</a>
+        </li>
+        <div class="logout">
+            <li><a href="/api/v1/videoteka/logout"><b>Log out</b></a></li>
+        </div>
+    </ul>
+</div>
+
 <div class ="mainDiv">
     <form action="#"
           th:action="@{/api/v1/videoteka/admin-add-delete/series}"

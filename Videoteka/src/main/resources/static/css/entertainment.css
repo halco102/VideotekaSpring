@@ -8,6 +8,20 @@ body{
     /*background-color: #DFCFBE;*/
     background-color: white;
 }
+
+
+.logout{
+    width:100px;
+    height:20px;
+    border-style:outset;
+    background-color:azure;
+}
+
+a:hover, a:active{
+    background-color:red;
+}
+
+
 .main_div{
   width: 90%;
   background-color: cyan;

@@ -29,12 +29,12 @@
                 <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="error"></div>
 
                 <label>Password</label>
-                <input type="text" th:field="*{password}">
+                <input type="password" th:field="*{password}">
                 <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
 
 
                 <label>Repeat password</label>
-                <input type="text" th:field="*{confirmPassword}">
+                <input type="password" th:field="*{confirmPassword}">
                 <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="error"></div>
 
                 <label>Email</label>

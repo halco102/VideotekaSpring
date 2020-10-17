@@ -19,6 +19,7 @@ public class BootStrap implements CommandLineRunner {
     private final RoleRepository roleRepository;
     private final StarRepository starRepository;
     private final CreatorRepository creatorRepository;
+    private final CountryRepository countryRepository;
 
     public BootStrap(MovieRepository movieRepository,
                      GenreRepository genreRepository,
@@ -27,7 +28,8 @@ public class BootStrap implements CommandLineRunner {
                      UserRepository userRepository,
                      RoleRepository roleRepository,
                      StarRepository starRepository,
-                     CreatorRepository creatorRepository){
+                     CreatorRepository creatorRepository,
+                     CountryRepository countryRepository){
         this.movieRepository=movieRepository;
         this.genreRepository=genreRepository;
         this.seriesRepository=seriesRepository;
@@ -36,6 +38,7 @@ public class BootStrap implements CommandLineRunner {
         this.roleRepository=roleRepository;
         this.starRepository=starRepository;
         this.creatorRepository=creatorRepository;
+        this.countryRepository=countryRepository;
     }
 
     @Override
@@ -47,6 +50,19 @@ public class BootStrap implements CommandLineRunner {
         Role role1 = new Role("USER");
         roleRepository.save(role);
         roleRepository.save(role1);
+
+
+        Country country = new Country("Bosna");
+        Country country1 = new Country("Njemacka");
+        Country country2 = new Country("Srbija");
+        Country country3 = new Country("Slovenija");
+
+
+        countryRepository.save(country);
+        countryRepository.save(country1);
+        countryRepository.save(country2);
+        countryRepository.save(country3);
+
         //create user
             User user = new User("Admir","Halilovic","halco","123","admir@hotmail.com");
             User user1 = new User("Admin","Admin","Admin","Admin","admin@hotmail.com");
@@ -112,10 +128,15 @@ public class BootStrap implements CommandLineRunner {
         Creator creator2 = new Creator("test3","test3");
         Creator creator3 = new Creator("test4","test4");
 
+        creator.setCountry(country);
+
+        System.out.println(creator.getCountry().getCountryName());
+
         creatorRepository.save(creator);
         creatorRepository.save(creator1);
         creatorRepository.save(creator2);
         creatorRepository.save(creator3);
+
 
         Cartoon cartoon = new Cartoon("Test1",1999,20);
         Cartoon cartoon1 = new Cartoon("Test2",2002,10);

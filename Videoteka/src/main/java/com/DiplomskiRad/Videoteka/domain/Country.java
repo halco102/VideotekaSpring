@@ -1,6 +1,7 @@
 package com.DiplomskiRad.Videoteka.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "country")
@@ -14,6 +15,9 @@ public class Country {
     @Column(name = "country_name",unique = true)
     String countryName;
 
+    @OneToMany(mappedBy = "country")
+    Set<Creator> creatorSet;
+
     //constructor
     public Country(){};
 
@@ -23,6 +27,15 @@ public class Country {
     //end counstructor
 
     //getter and setters
+
+
+    public Set<Creator> getCreatorSet() {
+        return creatorSet;
+    }
+
+    public void setCreatorSet(Set<Creator> creatorSet) {
+        this.creatorSet = creatorSet;
+    }
 
     public Long getId() {
         return id;

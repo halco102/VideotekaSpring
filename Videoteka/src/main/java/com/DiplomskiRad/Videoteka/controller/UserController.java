@@ -11,13 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.util.logging.Logger;
 
 @Controller
 @RequestMapping(MovieController.BASE_URL)
 public class UserController {
+
 
     private UserService userService;
 
@@ -74,7 +73,7 @@ public class UserController {
     //end
 
     @PostMapping("/create-account")
-    public String createAccount(@ModelAttribute("users") @Valid User user,
+    public String createAccount(@ModelAttribute("users")  User user,
                                 BindingResult result,
                                 Model model,
                                 Error error){
@@ -83,6 +82,7 @@ public class UserController {
         //provjeriti da li postoji user u bazi, ako postoji baci error ako ne nastavi dalje sa pregledom, tj provjeri jel
         //email validan ili je vec koji postoji u bazi
             roleService.save(role); //test line
+
 
             if (result.hasErrors()) {
                 return "videoteka/login/create-account.html";
@@ -98,5 +98,9 @@ public class UserController {
 
     }//end createAccount method
 
+    @GetMapping("/logout")
+    public String logoutController(){
+        return "videoteka/login/sign-in.html";
+    }
 
 }

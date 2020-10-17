@@ -1,10 +1,8 @@
 
 package com.DiplomskiRad.Videoteka.domain;
 
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,6 +16,7 @@ public class User {
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
 
     @Size(min = 2,max = 40,message = "First name has to be between 2 and 40")
     @Column(name = "fist_name")

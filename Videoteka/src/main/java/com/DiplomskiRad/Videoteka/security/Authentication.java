@@ -72,8 +72,12 @@ public class Authentication extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/api/v1/videoteka/login")
                 .usernameParameter("userName").passwordParameter("password")
-                .defaultSuccessUrl("/api/v1/videoteka/index",true);
-               // .failureUrl("/api/v1/videoteka/error");
+                .defaultSuccessUrl("/api/v1/videoteka/index",true)
+                .and()
+                .logout()
+                .logoutUrl("/api/v1/videoteka/logout")
+                .logoutSuccessUrl("/api/v1/videoteka/login");
+
             http.csrf().disable();
          }
 
