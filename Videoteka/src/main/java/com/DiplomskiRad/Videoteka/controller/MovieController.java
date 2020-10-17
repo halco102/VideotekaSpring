@@ -6,6 +6,7 @@ import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.repositories.GenreRepository;
 import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
 import com.DiplomskiRad.Videoteka.service.implementation.MovieService;
+import com.DiplomskiRad.Videoteka.service.implementation.StarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -25,10 +26,14 @@ public class MovieController {
 
     private final MovieService movieService;
     private final GenreService genreService;
+    private final StarService starService;
 
-    public MovieController(MovieService movieService, GenreService genreService, GenreRepository genreRepository){
+    public MovieController(MovieService movieService, GenreService genreService,
+                           GenreRepository genreRepository,
+                           StarService starService){
         this.genreService=genreService;
         this.movieService = movieService;
+        this.starService=starService;
     }
 
 
@@ -42,20 +47,9 @@ public class MovieController {
     public String getMovies(Model model,
                             String keyword,
                             String searchGenre){
-        //Kasnije prepravit da logika bude u service
-/*        if(keyword!=null && searchGenre==null) {
-            model.addAttribute("movies", movieService.findByKeyword(keyword));
-            model.addAttribute("genres", genreService.findAllGenre());
-        }else if(keyword==null && searchGenre!=null ){
-            model.addAttribute("movies",movieService.listOfMovieOnGenre(searchGenre));
-            model.addAttribute("genres", genreService.findAllGenre());
-        }else{
-            model.addAttribute("movies",movieService.findAllMovies());
-            model.addAttribute("genres", genreService.findAllGenre());
-        }*/
-
         model.addAttribute("movies",movieService.searchEngine(searchGenre,keyword));
         model.addAttribute("genres",genreService.findAllGenre());
+        model.addAttribute("stars",starService.getAllStars());
 
        return  "videoteka/entertainment/movies.html";
     }

@@ -1,6 +1,7 @@
 package com.DiplomskiRad.Videoteka.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "star")
@@ -18,6 +19,8 @@ public class Star {
     @JoinColumn(name="country_id")
     private Country country;
 
+    @ManyToMany(mappedBy = "stars")
+    private Set<Movie> movie;
 
     //Constructor
     public Star(){};
@@ -29,6 +32,14 @@ public class Star {
 
     //getters and setters
 
+
+    public Set<Movie> getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Set<Movie> movie) {
+        this.movie = movie;
+    }
 
     public Country getCountry() {
         return country;

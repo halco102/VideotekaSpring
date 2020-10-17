@@ -60,11 +60,29 @@ public class BootStrap implements CommandLineRunner {
 
         //ennd
 
+        //star
+            Star star = new Star("Leonardo","DiCaprio");
+            Star star1 = new Star("Christian","Bale");
+            Star star2 = new Star("Brad","Pitt");
+            Star star3 = new Star("Steve","Carell");
+
+            starRepository.save(star);
+            starRepository.save(star1);
+            starRepository.save(star2);
+            starRepository.save(star3);
+        //end
+
+
         //create movie
         Movie movie = new Movie("Test1",1999,20);
         Movie movie1 = new Movie("Test2",2002,40);
         Movie movie2 = new Movie("KKK",2003,30);
         Movie movie3 = new Movie("Test3",2004,50);
+
+        movie.getStars().addAll(Arrays.asList(star,star2,star1,star3));
+        movie1.getStars().addAll(Arrays.asList(star3,star2));
+        movie2.getStars().addAll(Arrays.asList(star1,star2));
+        movie3.getStars().addAll(Arrays.asList(star,star1));
         //save movie
         movieRepository.save(movie);
         movieRepository.save(movie1);
