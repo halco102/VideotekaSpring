@@ -46,6 +46,7 @@
             <th>Year</th>
             <th>Seasons</th>
             <th>Genre</th>
+            <th>Stars</th>
         </tr>
         <tr th:each="series : ${series}">
             <td th:text="${series.id}"></td>
@@ -54,6 +55,9 @@
             <td th:text="${series.seasons}"></td>
             <td><span th:each="genres : ${series.genres}"
                       th:text="${genres.name + ' '}">
+          </span></td>
+            <td><span th:each="stars : ${series.stars}"
+                      th:text="${stars.firstName+ ' ' + stars.lastName +',' + ' '}">
           </span></td>
         </tr>
 

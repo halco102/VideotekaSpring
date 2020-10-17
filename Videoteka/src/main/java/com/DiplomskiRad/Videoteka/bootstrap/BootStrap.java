@@ -18,6 +18,7 @@ public class BootStrap implements CommandLineRunner {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final StarRepository starRepository;
+    private final CreatorRepository creatorRepository;
 
     public BootStrap(MovieRepository movieRepository,
                      GenreRepository genreRepository,
@@ -25,7 +26,8 @@ public class BootStrap implements CommandLineRunner {
                      CartoonRepository cartoonRepository,
                      UserRepository userRepository,
                      RoleRepository roleRepository,
-                     StarRepository starRepository){
+                     StarRepository starRepository,
+                     CreatorRepository creatorRepository){
         this.movieRepository=movieRepository;
         this.genreRepository=genreRepository;
         this.seriesRepository=seriesRepository;
@@ -33,6 +35,7 @@ public class BootStrap implements CommandLineRunner {
         this.userRepository=userRepository;
         this.roleRepository=roleRepository;
         this.starRepository=starRepository;
+        this.creatorRepository=creatorRepository;
     }
 
     @Override
@@ -74,7 +77,7 @@ public class BootStrap implements CommandLineRunner {
 
 
         //create movie
-        Movie movie = new Movie("Test1",1999,20);
+        Movie movie = new Movie("Wolf of the Wall Street",1999,20);
         Movie movie1 = new Movie("Test2",2002,40);
         Movie movie2 = new Movie("KKK",2003,30);
         Movie movie3 = new Movie("Test3",2004,50);
@@ -94,15 +97,36 @@ public class BootStrap implements CommandLineRunner {
         Series series2 = new Series("Test3",2001,21);
         Series series3 = new Series("KKK",2010,10);
 
+        series.getStars().addAll(Arrays.asList(star,star2,star1,star3));
+        series1.getStars().addAll(Arrays.asList(star3,star2));
+        series2.getStars().addAll(Arrays.asList(star1,star2));
+        series3.getStars().addAll(Arrays.asList(star,star1));
+
         seriesRepository.save(series);
         seriesRepository.save(series1);
         seriesRepository.save(series2);
         seriesRepository.save(series3);
 
+        Creator creator = new Creator("test1","test1");
+        Creator creator1 = new Creator("test2","test2");
+        Creator creator2 = new Creator("test3","test3");
+        Creator creator3 = new Creator("test4","test4");
+
+        creatorRepository.save(creator);
+        creatorRepository.save(creator1);
+        creatorRepository.save(creator2);
+        creatorRepository.save(creator3);
+
         Cartoon cartoon = new Cartoon("Test1",1999,20);
         Cartoon cartoon1 = new Cartoon("Test2",2002,10);
         Cartoon cartoon2 = new Cartoon("Test3",2007,4);
         Cartoon cartoon3 = new Cartoon("KKK",2011,7);
+
+        cartoon.getCreators().addAll(Arrays.asList(creator,creator1));
+        cartoon1.getCreators().addAll(Arrays.asList(creator1,creator2));
+        cartoon2.getCreators().addAll(Arrays.asList(creator3,creator1));
+        cartoon3.getCreators().addAll(Arrays.asList(creator2));
+
 
         cartoonRepository.save(cartoon);
         cartoonRepository.save(cartoon1);

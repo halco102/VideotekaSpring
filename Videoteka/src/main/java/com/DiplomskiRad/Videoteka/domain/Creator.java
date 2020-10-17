@@ -21,6 +21,11 @@ public class Creator {
     //Constructor
     public Creator(){};
 
+    public Creator(String firstName,String lastName){
+        this.firstName=firstName;
+        this.lastName=lastName;
+    }
+
     //end const
 
     //getters n setters

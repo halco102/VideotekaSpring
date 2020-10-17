@@ -5,6 +5,7 @@ import com.DiplomskiRad.Videoteka.domain.Genre;
 import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.domain.Series;
 import com.DiplomskiRad.Videoteka.service.implementation.CartoonService;
+import com.DiplomskiRad.Videoteka.service.implementation.CreatorService;
 import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,17 +21,21 @@ public class CartoonController {
 
     private final CartoonService cartoonService;
     private final GenreService genreService;
+    private final CreatorService creatorService;
 
     public CartoonController(CartoonService cartoonService,
-                             GenreService genreService) {
+                             GenreService genreService,
+                             CreatorService creatorService) {
         this.cartoonService = cartoonService;
         this.genreService=genreService;
+        this.creatorService=creatorService;
     }
 
     @GetMapping("/cartoons")
     public String getCartoons(Model model,String keyword,String searchGenre){
         model.addAttribute("cartoons",this.cartoonService.searchEngine(searchGenre,keyword));
         model.addAttribute("genres",this.genreService.findAllGenre());
+        model.addAttribute("creators",this.creatorService.getAllCreators());
 
         return "videoteka/entertainment/cartoon.html";
     }

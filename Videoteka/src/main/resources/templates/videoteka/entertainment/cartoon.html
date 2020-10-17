@@ -45,6 +45,7 @@
             <th>Year</th>
             <th>Seasons</th>
             <th>Genre</th>
+            <th>Creators</th>
         </tr>
         <tr th:each="cartoons : ${cartoons}">
             <td th:text="${cartoons.id}"></td>
@@ -53,6 +54,9 @@
             <td th:text="${cartoons.seasons}"></td>
             <td><span th:each="genres : ${cartoons.genres}"
                       th:text="${genres.name + ' '}">
+          </span></td>
+            <td><span th:each="creators : ${cartoons.creators}"
+                      th:text="${creators.firstName + ' ' + creators.lastName + ',' + ' '}">
           </span></td>
         </tr>
 

@@ -6,6 +6,7 @@ import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.domain.Series;
 import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
 import com.DiplomskiRad.Videoteka.service.implementation.SeriesService;
+import com.DiplomskiRad.Videoteka.service.implementation.StarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +22,13 @@ public class SeriesController {
 
     private final SeriesService seriesService;
     private final GenreService genreService;
+    private final StarService starService;
 
 
-    public SeriesController(SeriesService seriesService,GenreService genreService) {
+    public SeriesController(SeriesService seriesService,GenreService genreService,StarService starService) {
         this.seriesService = seriesService;
         this.genreService=genreService;
+        this.starService=starService;
 
     }
 
@@ -33,6 +36,8 @@ public class SeriesController {
     public String getSeries(Model model,String keyword,String searchGenre){
         model.addAttribute("series",seriesService.searchEngine(searchGenre,keyword));
         model.addAttribute("genres",genreService.findAllGenre());
+        model.addAttribute("stars",starService.getAllStars());
+
         return "videoteka/entertainment/series.html";
     }
 
