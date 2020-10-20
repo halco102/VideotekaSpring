@@ -6,6 +6,8 @@ import com.DiplomskiRad.Videoteka.domain.User;
 import com.DiplomskiRad.Videoteka.service.implementation.RoleService;
 import com.DiplomskiRad.Videoteka.service.implementation.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,17 @@ public class UserController {
         this.userService=userService;
     }
 
+    private String displayUsername;
+
+    @GetMapping("/index")
+    public  String getIndex(Model model){
+       //check koji user je loged in trenutno
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String test= authentication.getName();
+        model.addAttribute("userName",authentication.getName());
+        return "videoteka/index.html";
+    }
+
     @GetMapping("")
     public String getLogin(){
         return "redirect:/api/v1/videoteka/login";
@@ -34,27 +47,26 @@ public class UserController {
     public String showLoginPage(Model model){
         User user = new User();
         model.addAttribute("users",user);
+
         return "videoteka/login/sign-in.html";
     }
 
-/*
-    @GetMapping("/error")
-    public String userDoesNotExist(){
-        return "videoteka/login/error.html";
-    }
-*/
 
+
+
+    /*
     @PostMapping("/login")
     public String register(Model model,@Valid @ModelAttribute("users") User user){
 
-        String encodedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        userService.save(user);
+
         if(userService.exists(user.getUserName(),user.getPassword())!=true){
-            return "redirect:/api/v1/videoteka/error";
+            System.out.println("Hello world");
+            return "videoteka/login/sign-in.html";
+        }else {
+            System.out.println("No");
+            return "redirect:/api/v1/videoteka/index";
         }
-        return "redirect:/api/v1/videoteka/index";
-    }
+    }*/
     //end Login
 
     @GetMapping("/register")

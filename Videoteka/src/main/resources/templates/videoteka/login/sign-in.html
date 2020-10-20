@@ -9,7 +9,7 @@
 <h1 style="text-align:center">Login</h1>
 
 <div class="sign_in">
-    <form action="#" method="post" th:object="${users}" th:action="@{/api/v1/videoteka/login}"  >
+    <form action="#" method="post" th:object="${users}"  th:action="@{/api/v1/videoteka/login}" >
 
         <label>Username</label>
         <input type="text" th:field="*{userName}">
@@ -18,7 +18,7 @@
         <input type="password" th:field="*{password}">
 
         <div th:if="${param.error}">
-            Invalid username and password.
+            Invalid username or password.
         </div>
 
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
