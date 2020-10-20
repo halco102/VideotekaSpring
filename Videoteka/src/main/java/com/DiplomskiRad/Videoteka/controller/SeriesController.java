@@ -7,6 +7,8 @@ import com.DiplomskiRad.Videoteka.domain.Series;
 import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
 import com.DiplomskiRad.Videoteka.service.implementation.SeriesService;
 import com.DiplomskiRad.Videoteka.service.implementation.StarService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +39,7 @@ public class SeriesController {
         model.addAttribute("series",seriesService.searchEngine(searchGenre,keyword));
         model.addAttribute("genres",genreService.findAllGenre());
         model.addAttribute("stars",starService.getAllStars());
+        model.addAttribute("userName",UserController.displayUsername);
 
         return "videoteka/entertainment/series.html";
     }

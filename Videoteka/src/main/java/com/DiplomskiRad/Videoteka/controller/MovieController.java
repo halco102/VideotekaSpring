@@ -44,6 +44,7 @@ public class MovieController {
         model.addAttribute("movies",movieService.searchEngine(searchGenre,keyword));
         model.addAttribute("genres",genreService.findAllGenre());
         model.addAttribute("stars",starService.getAllStars());
+        model.addAttribute("userName",UserController.displayUsername);
 
        return  "videoteka/entertainment/movies.html";
     }

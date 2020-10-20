@@ -26,14 +26,14 @@ public class UserController {
         this.userService=userService;
     }
 
-    private String displayUsername;
+    public static String displayUsername;
 
     @GetMapping("/index")
     public  String getIndex(Model model){
        //check koji user je loged in trenutno
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        String test= authentication.getName();
-        model.addAttribute("userName",authentication.getName());
+        displayUsername = authentication.getName();
+        model.addAttribute("userName",displayUsername);
         return "videoteka/index.html";
     }
 

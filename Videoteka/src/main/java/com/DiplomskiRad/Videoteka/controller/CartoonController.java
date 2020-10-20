@@ -36,6 +36,7 @@ public class CartoonController {
         model.addAttribute("cartoons",this.cartoonService.searchEngine(searchGenre,keyword));
         model.addAttribute("genres",this.genreService.findAllGenre());
         model.addAttribute("creators",this.creatorService.getAllCreators());
+        model.addAttribute("userName",UserController.displayUsername);
 
         return "videoteka/entertainment/cartoon.html";
     }
