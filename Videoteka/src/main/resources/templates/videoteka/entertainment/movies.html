@@ -51,6 +51,7 @@
           <th>Runtime</th>
           <th>Genre</th>
           <th>Stars</th>
+          <th>Buy</th>
       </tr>
       <tr th:each="movie : ${movies}">
           <td th:text="${movie.id}"></td>
@@ -63,7 +64,14 @@
           <td><span th:each="stars : ${movie.stars}"
                     th:text="${stars.firstName+ ' ' + stars.lastName +',' + ' '}">
           </span></td>
-           </tr>
+
+          <td>
+              <form>
+                  <button type="submit" style="height:30px;"><b>Buy</b></button>
+              </form>
+          </td>
+      </tr>
+
 
   </table>
 
