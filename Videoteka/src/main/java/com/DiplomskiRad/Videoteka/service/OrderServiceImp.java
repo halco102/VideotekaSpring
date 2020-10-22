@@ -20,4 +20,10 @@ public class OrderServiceImp implements OrderService {
     public List<Order> findAllOrders() {
         return this.orderRepository.findAll();
     }
+
+    @Override
+    public void saveOrder(Order order) {
+        System.out.println("Saved order ID =" + order.getId());
+        this.orderRepository.save(order);
+    }
 }
