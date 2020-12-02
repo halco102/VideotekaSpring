@@ -30,7 +30,7 @@ public class UserController {
 
     @GetMapping("/index")
     public  String getIndex(Model model){
-       //check koji user je loged in trenutno
+        //check koji user je loged in trenutno
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         displayUsername = authentication.getName();
         model.addAttribute("userName",displayUsername);
@@ -78,14 +78,14 @@ public class UserController {
 
     //test purpose
     @Autowired
-            public RoleService roleService;
+    public RoleService roleService;
 
     Role role = new Role("USER");
 
     //end
 
-    @PostMapping("/create-account")
-    public String createAccount(@ModelAttribute("users")  User user,
+    @PostMapping("/register")
+    public String createAccount(@Valid @ModelAttribute("users")  User user,
                                 BindingResult result,
                                 Model model,
                                 Error error){
@@ -93,20 +93,21 @@ public class UserController {
 
         //provjeriti da li postoji user u bazi, ako postoji baci error ako ne nastavi dalje sa pregledom, tj provjeri jel
         //email validan ili je vec koji postoji u bazi
-            roleService.save(role); //test line
+        roleService.save(role); //test line
 
 
-            if (result.hasErrors()) {
-                return "videoteka/login/create-account.html";
-            }
-            if(this.userService.validation(user.getUserName(),user.geteMail(),user.getPassword(),user.getConfirmPassword())==true){
-
-                user.getUserRoleSet().add(role); //test purpose
-                this.userService.save(user);
-                return "redirect:/api/v1/videoteka/login";
-            }
-
+        if (result.hasErrors()) {
             return "videoteka/login/create-account.html";
+        }
+        else if(this.userService.validation(user)==true){
+
+            user.getUserRoleSet().add(role); //test purpose
+            this.userService.save(user);
+            return "redirect:/api/v1/videoteka/login";
+
+        }
+
+        return "videoteka/login/create-account.html";
 
     }//end createAccount method
 

@@ -43,11 +43,13 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public boolean validation(String username,String email,String password,String repeatPassword){
-        if(checkIfUsernameExists(username) == false
-                && checkEmail(email) == false
-                && checkIfPasswordMach(password,repeatPassword)==true){
-            return true;
+    public boolean validation(User user){
+        if(!user.getUserName().isEmpty() || !user.getPassword().isEmpty() || !user.geteMail().isEmpty() || !user.getFirstName().isEmpty()) {
+            if (checkIfUsernameExists(user.getUserName()) == false
+                    && checkEmail(user.geteMail()) == false
+                    && checkIfPasswordMach(user.getPassword(), user.getConfirmPassword()) == true) {
+                return true;
+            }
         }
         return false;
     }
@@ -88,15 +90,15 @@ public class UserServiceImp implements UserService {
     }
 
     /*
-    * primas LoginDto (username and password) ili UserDto koji vec ima password ili ne
-    *
-    * if findByUsername !)   da li je on pronadjenog Usera jednak password iy DTO koji poslan
-    *
-    * ako jeste saljes objekta
-    *
-    * ako ne Bad credentials
-    *
-    * */
+     * primas LoginDto (username and password) ili UserDto koji vec ima password ili ne
+     *
+     * if findByUsername !)   da li je on pronadjenog Usera jednak password iy DTO koji poslan
+     *
+     * ako jeste saljes objekta
+     *
+     * ako ne Bad credentials
+     *
+     * */
 
     @Override
     public User checkIfUserIsInDatabase(String username, String password) {

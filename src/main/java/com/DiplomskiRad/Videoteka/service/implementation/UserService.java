@@ -26,5 +26,5 @@ public interface UserService {
 
     boolean checkIfUsernameExists(String username);
 
-    boolean validation(String username, String email, String password, String repeatPassword);
+    boolean validation(User user);
 }
