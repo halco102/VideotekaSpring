@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+<html>
+<head>
+    <title>Cartoons</title>
+    <link href="/css/entertainment.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+<h1 style="text-align:center">Cartoons</h1>
+
+<h3>User: <span th:text="${userName}"></span></h3>
+
+
+<div class="nav">
+    <ul>
+        <li>
+            <a href="/api/v1/videoteka/series"> Series</a>
+        </li>
+        <li>
+            <a href="/api/v1/videoteka/movies">Movies</a>
+        </li>
+
+        <div class="logout">
+            <li><a href="/api/v1/videoteka/logout"><b>Log out</b></a></li>
+        </div>
+    </ul>
+</div>
+
+
+<div class="controller_div">
+
+    <form th:action="@{/api/v1/videoteka/cartoons}" method="get">
+        <input id="txtSearch" type="text" name="keyword">
+        <button type="submit">Go</button>
+    </form>
+
+    <form th:action="@{/api/v1/videoteka/cartoons}" method="get">
+        <label class="label">Search genre</label>
+        <select id="searchGenre" name="searchGenre" >
+            <option th:each="g:${genres}" th:text="${g.name}"></option>
+        </select>
+        <button type="submit">Go</button>
+    </form>
+
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Seasons</th>
+            <th>Genre</th>
+            <th>Creators</th>
+            <th>Creators origin</th>
+        </tr>
+        <tr th:each="cartoons : ${cartoons}">
+            <td th:text="${cartoons.id}"></td>
+            <td th:text="${cartoons.name}"></td>
+            <td th:text="${cartoons.year}"></td>
+            <td th:text="${cartoons.seasons}"></td>
+            <td><span th:each="genres : ${cartoons.genres}"
+                      th:text="${genres.name + ' '}">
+          </span></td>
+            <td><span th:each="creators : ${cartoons.creators}"
+                      th:text="${creators.firstName + ' ' + creators.lastName + ',' + ' '}">
+          </span></td>
+            <td><span th:each="creators : ${cartoons.creators}"
+                      ><span th:each="country : ${creators.country}"
+                        th:text="${country.countryName}">
+                        </span>
+          </span></td>
+        </tr>
+
+    </table>
+
+</div>
+
+</div>
+
+
+</body>
+
+
+</html>

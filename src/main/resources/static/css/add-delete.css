@@ -1,0 +1,71 @@
+.checkBoxDiv{
+   background-color:yellow;
+   padding:10px;
+}
+.select{
+    font-family: "Times New Roman", Times, serif;
+    min-width:265px;
+    min-height: 45px;
+   }
+
+.mainDiv{
+    background-color:green;
+    width:100%;
+    text-align:center;
+}
+
+
+ul{
+    display:flex;
+    list-style-type: none;
+}
+li{
+    flex:1;
+}
+
+
+.nav{
+    width:100%;
+    margin:0,auto;
+    /*background-color:blue;*/
+    background-color: #DFCFBE;
+    padding:10px;
+    text-align: center;
+}
+
+
+.logout{
+    width:100px;
+    height:20px;
+    border-style:outset;
+    background-color:azure;
+    float:right;
+    display:block;
+}
+
+a:hover, a:active{
+    background-color:red;
+}
+
+
+
+.table{
+
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 50%;
+      margin:5px auto;
+}
+
+
+td,th,table{
+ text-align:center;
+}
+
+.buttonStyle{
+    width:100px;
+    height:300px;
+    margin-top:5px;
+    margin-bottom:5px;
+    text-align:center;
+}

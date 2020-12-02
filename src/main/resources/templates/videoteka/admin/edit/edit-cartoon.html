@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add entertainment</title>
+    <link href="/css/add-delete.css" rel="stylesheet"/>
+
+
+</head>
+
+<body>
+<h1 style="text-align:center">Edit Cartoons</h1>
+
+<div class ="mainDiv">
+    <form action="#"
+          th:action="@{/api/v1/videoteka/admin-add-delete/cartoons/update}"
+          method="post"
+          th:object="${updateCartoons}"
+    >
+        <div style="padding:5px">
+            <table class="table">
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Seasons</th>
+                </tr>
+
+                <tr >
+                    <td>
+                        <input type="hidden" th:field="*{id}">
+                    </td>
+                    <td>
+                        <input type="text" th:field="*{name}">
+                    </td>
+                    <td>
+                        <input type="text" th:field="*{year}">
+                    </td>
+                    <td>
+                        <input type="text" th:field="*{seasons}">
+                    </td>
+                </tr>
+
+            </table>
+
+
+        </div>
+        <div class="checkBoxDiv">
+            <select multiple="multiple" th:name="ids" class="select">
+                <option th:each="p : ${g}" th:value="${p.id}"  th:text="${p.name}" style="text-align:center">
+                </option>
+            </select>
+        </div>
+
+
+        <button style="
+            width:100px;
+            height:30px;
+            margin-top:5px;
+            margin-bottom:5px;
+            text-align:center;" type="submit">Go</button>
+
+    </form>
+
+</div>
+
+
+</div>
+
+
+</body>
+</html>

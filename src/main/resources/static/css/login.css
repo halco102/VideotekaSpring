@@ -1,0 +1,40 @@
+body{
+    width: 100%;
+    background-color: azure;
+
+}
+
+.sign_in{
+
+    padding: 10px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.button{
+    font-size: 16px;
+    padding: 6px;
+    margin-top: 20px;
+}
+
+input{
+    margin-bottom:15px;
+    margin-top: 5px;
+    display: block;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.question{
+    margin-top: 15%;
+    text-align: center;
+}
+
+label{
+    display: block;
+    text-align: center;
+}

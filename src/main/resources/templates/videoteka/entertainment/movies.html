@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+<html>
+<head>
+  <title>Movies</title>
+    <link href="/css/entertainment.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+<h1 style="text-align:center">Movies</h1>
+
+<h3>User: <span th:text="${userName}"></span></h3>
+
+<div class="nav">
+    <ul>
+        <li>
+            <a href="/api/v1/videoteka/series"> Series</a>
+        </li>
+        <li>
+            <a href="/api/v1/videoteka/cartoons">Cartoons</a>
+        </li>
+        <div class="logout">
+            <li><a href="/api/v1/videoteka/logout"><b>Log out</b></a></li>
+        </div>
+    </ul>
+</div>
+
+
+<div class="controller_div">
+
+        <form th:action="@{/api/v1/videoteka/movies}" method="get">
+            <input id="txtSearch" type="text" name="keyword">
+            <button type="submit">Go</button>
+        </form>
+
+    <form th:action="@{/api/v1/videoteka/movies}" method="get">
+        <label class="label">Search genre</label>
+        <select id="searchGenre" name="searchGenre" >
+            <option th:each="g:${genres}" th:text="${g.name}"></option>
+        </select>
+        <button type="submit">Go</button>
+    </form>
+
+
+    <table class="table">
+      <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Year</th>
+          <th>Runtime</th>
+          <th>Genre</th>
+          <th>Stars</th>
+          <th>Buy</th>
+      </tr>
+      <tr th:each="movie : ${movies}">
+          <td th:text="${movie.id}"></td>
+          <td th:text="${movie.name}"></td>
+          <td th:text="${movie.year}"></td>
+          <td th:text="${movie.runtime}"></td>
+          <td><span th:each="genres : ${movie.genres}"
+                    th:text="${genres.name + ' '}">
+          </span></td>
+          <td><span th:each="stars : ${movie.stars}"
+                    th:text="${stars.firstName+ ' ' + stars.lastName +',' + ' '}">
+          </span></td>
+
+          <td>
+                <td><a th:href="@{/api/v1/videoteka/movies/buy/{id}(id=${movie.id})}"><b>Buy</b></a></td>
+          </td>
+      </tr>
+
+
+  </table>
+
+    </div>
+
+  </div>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,46 @@
+body{
+  background-color: cadetblue;
+
+}
+
+.mainDiv{
+    margin:0,auto;
+    text-align: center;
+    color:white;
+
+}
+
+.navDiv{
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.inner{
+  background-color: cornflowerblue;
+  width: 80%;
+
+}
+
+ul{
+  list-style-type: none;
+  display: flex;
+  padding: 2px;
+}
+
+li{
+  flex: 1;
+  text-align: center;
+}
+
+.logout{
+    width:100px;
+    height:20px;
+    border-style:outset;
+    background-color:azure;
+}
+
+a:hover, a:active{
+    background-color:red;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add entertainment</title>
+    <link href="/css/add-delete.css" rel="stylesheet"/>
+
+
+</head>
+
+<body>
+<h1 style="text-align:center">Add Cartoons</h1>
+
+
+<div class="nav">
+    <ul>
+        <li>
+            <a href="/api/v1/videoteka/admin-add-delete/series"> Series</a>
+        </li>
+        <li>
+            <a href="/api/v1/videoteka/admin-add-delete/movies">Movies</a>
+        </li>
+        <div class="logout">
+            <li><a href="/api/v1/videoteka/logout"><b>Log out</b></a></li>
+        </div>
+    </ul>
+</div>
+
+
+<div class ="mainDiv">
+    <form action="#"
+          th:action="@{/api/v1/videoteka/admin-add-delete/cartoons}"
+          method="post"
+          th:object="${cartoons}"
+    >
+        <div style="padding:5px">
+            <table class="table">
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Seasons</th>
+                </tr>
+
+                <tr >
+                    <td>
+                        <input type="text" th:field="*{name}">
+                    </td>
+                    <td>
+                        <input type="text" th:field="*{year}">
+                    </td>
+                    <td>
+                        <input type="text" th:field="*{seasons}">
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+        <div class="checkBoxDiv">
+            <select multiple="multiple" th:name="ids" class="select">
+                <option th:each="p : ${genre}" th:value="${p.id}"  th:text="${p.name}" style="text-align:center">
+                </option>
+            </select>
+        </div>
+
+        <button style="
+            width:100px;
+            height:30px;
+            margin-top:5px;
+            margin-bottom:5px;
+            text-align:center;" type="submit cartoons">Go</button>
+
+    </form>
+
+</div>
+
+<div class="getAllMovies">
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Seasons</th>
+        </tr>
+        <tr th:each="c : ${cartoon}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.name}"></td>
+            <td th:text="${c.year}"></td>
+            <td th:text="${c.seasons}"></td>
+            <td><span th:each="genres : ${c.genres}"
+                      th:text="${genres.name + ' '}">
+          </span></td>
+            <td><a th:href="@{/api/v1/videoteka/delete-cartoon/{id}(id=${c.id})}">Delete</a></td>
+            <td><a th:href="@{/api/v1/videoteka/admin-add-delete/cartoons/update/{id}(id=${c.id})}">Edit</a></td>
+        </tr>
+
+    </table>
+
+</div>
+
+
+</body>
+</html>

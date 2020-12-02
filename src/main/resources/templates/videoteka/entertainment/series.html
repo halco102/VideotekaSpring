@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Series</title>
+    <link href="/css/entertainment.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+<h1 style="text-align:center">Series</h1>
+
+<h3>User: <span th:text="${userName}"></span></h3>
+
+
+<div class="nav">
+    <ul>
+        <li>
+            <a href="/api/v1/videoteka/movies"> Movies</a>
+        </li>
+        <li>
+            <a href="/api/v1/videoteka/cartoons">Cartoons</a>
+        </li>
+        <div class="logout">
+            <li><a href="/api/v1/videoteka/logout"><b>Log out</b></a></li>
+        </div>
+    </ul>
+</div>
+
+
+<div class="controller_div">
+
+    <form th:action="@{/api/v1/videoteka/series}" method="get">
+        <input id="txtSearch" type="text" name="keyword">
+        <button type="submit">Go</button>
+    </form>
+
+    <form th:action="@{/api/v1/videoteka/series}" method="get">
+        <label class="label">Search genre</label>
+        <select id="searchGenre" name="searchGenre" >
+            <option th:each="g:${genres}" th:text="${g.name}"></option>
+        </select>
+        <button type="submit">Go</button>
+    </form>
+
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Seasons</th>
+            <th>Genre</th>
+            <th>Stars</th>
+        </tr>
+        <tr th:each="series : ${series}">
+            <td th:text="${series.id}"></td>
+            <td th:text="${series.name}"></td>
+            <td th:text="${series.year}"></td>
+            <td th:text="${series.seasons}"></td>
+            <td><span th:each="genres : ${series.genres}"
+                      th:text="${genres.name + ' '}">
+          </span></td>
+            <td><span th:each="stars : ${series.stars}"
+                      th:text="${stars.firstName+ ' ' + stars.lastName +',' + ' '}">
+          </span></td>
+        </tr>
+
+    </table>
+
+    </div>
+
+</div>
+
+
+</body>
+
+
+</html>
+
+</body>
+</html>

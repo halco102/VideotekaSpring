@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="/css/login.css" rel="stylesheet"/>
+</head>
+<body>
+<h1 style="text-align:center">Login</h1>
+
+<div class="sign_in">
+    <form action="#" method="post" th:object="${users}"  th:action="@{/api/v1/videoteka/login}" >
+
+        <label>Username</label>
+        <input type="text" th:field="*{userName}">
+
+        <label>Password</label>
+        <input type="password" th:field="*{password}">
+
+        <div th:if="${param.error}">
+            Invalid username or password.
+        </div>
+
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+        <button type="submit" class="button">Login</button>
+
+        <button onclick="location.href='/api/v1/videoteka/register'" type="button" class="button">
+            Create account</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

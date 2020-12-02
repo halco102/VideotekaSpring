@@ -1,0 +1,32 @@
+body{
+    width: 100%;
+    background-color: azure;
+}
+
+.form-main{
+    margin: 0,auto;
+    padding: 20px;
+}
+
+form{
+    text-align: center;
+}
+
+label{
+    display: block;
+    text-align: center;
+}
+
+input{
+    margin:10px;
+}
+
+button{
+    margin: 40px;
+    font-size: 20px;
+    height: 50px;
+}
+
+.question{
+    text-align: center;
+}
