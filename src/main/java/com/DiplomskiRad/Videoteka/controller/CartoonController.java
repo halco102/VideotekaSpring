@@ -4,9 +4,12 @@ import com.DiplomskiRad.Videoteka.domain.Cartoon;
 import com.DiplomskiRad.Videoteka.domain.Genre;
 import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.domain.Series;
+import com.DiplomskiRad.Videoteka.dto.CartoonDto;
+import com.DiplomskiRad.Videoteka.dto.GenreDto;
 import com.DiplomskiRad.Videoteka.service.implementation.CartoonService;
 import com.DiplomskiRad.Videoteka.service.implementation.CreatorService;
 import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +20,13 @@ import java.util.List;
 
 @Controller
 @RequestMapping(MovieController.BASE_URL)
+@Slf4j
 public class CartoonController {
 
     private final CartoonService cartoonService;
     private final GenreService genreService;
     private final CreatorService creatorService;
+
 
     public CartoonController(CartoonService cartoonService,
                              GenreService genreService,
@@ -59,9 +64,9 @@ public class CartoonController {
 
     @GetMapping("/admin-add-delete/cartoons")
     public  String addEntertainment(Model model,String keyword){
-        Cartoon cartoon= new Cartoon();
+        CartoonDto cartoon= new CartoonDto();
         model.addAttribute("cartoons",cartoon);
-        List<Genre> genres = new ArrayList<>();
+        List<GenreDto> genres = new ArrayList<>();
         genreService.findAllGenre().iterator().forEachRemaining(genres::add);
         model.addAttribute("genre",genres);
         model.addAttribute("cartoon",cartoonService.findByKeyword(keyword));
@@ -74,9 +79,9 @@ public class CartoonController {
     @GetMapping("/admin-add-delete/cartoons/update/{id}")
     public String editMovie(Model model, @PathVariable Long id, Movie movie, String keyword){
 
-        Cartoon updateCartoons= cartoonService.findCartoonById(id);
-        List<Genre> genres = new ArrayList<>();
-        genreService.findAllGenre().iterator().forEachRemaining(genres::add);
+        CartoonDto updateCartoons= cartoonService.findCartoonById(id);
+        List<GenreDto> genres = new ArrayList<>();
+       // genreService.findAllGenre().iterator().forEachRemaining(genres::add); treba dto uradit
         model.addAttribute("updateCartoons",updateCartoons);
         model.addAttribute("g",genreService.findAllGenre());
         model.addAttribute("c",cartoonService.findByKeyword(keyword));
@@ -86,15 +91,15 @@ public class CartoonController {
     }
 
     @PostMapping("/admin-add-delete/cartoons/update")
-    public String edit(@Valid @ModelAttribute("updateCartoons")Cartoon cartoon,
-                             @RequestParam("ids") List<Genre> genres,
+    public String edit(@Valid @ModelAttribute("updateCartoons") CartoonDto cartoonDto,
+                             @RequestParam("ids") List<GenreDto> genres,
                              Model model){
 
         for(int i = 0 ; i < genres.size();i++ ){
-            cartoon.getGenres().add(genres.get(i));
+            cartoonDto.getGenres().add(genres.get(i));
         }
-        cartoonService.addCartoon(cartoon);
-        System.out.println("Saved");
+        cartoonService.addCartoon(cartoonDto);
+        log.info("Saved cartoon");
         return "redirect:/api/v1/videoteka/admin-add-delete/cartoons";
     }
 //end

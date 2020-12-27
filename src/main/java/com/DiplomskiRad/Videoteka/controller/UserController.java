@@ -3,6 +3,8 @@ package com.DiplomskiRad.Videoteka.controller;
 
 import com.DiplomskiRad.Videoteka.domain.Role;
 import com.DiplomskiRad.Videoteka.domain.User;
+import com.DiplomskiRad.Videoteka.dto.RoleDto;
+import com.DiplomskiRad.Videoteka.dto.UserDto;
 import com.DiplomskiRad.Videoteka.service.implementation.RoleService;
 import com.DiplomskiRad.Videoteka.service.implementation.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +47,7 @@ public class UserController {
     //Login of user
     @GetMapping("/login")
     public String showLoginPage(Model model){
-        User user = new User();
+        UserDto user = new UserDto();
         model.addAttribute("users",user);
 
         return "videoteka/login/sign-in.html";
@@ -71,7 +73,7 @@ public class UserController {
 
     @GetMapping("/register")
     public String createAccount(Model model){
-        User user = new User();
+        UserDto user = new UserDto();
         model.addAttribute("users",user);
         return "videoteka/login/create-account.html";
     }
@@ -80,12 +82,12 @@ public class UserController {
     @Autowired
     public RoleService roleService;
 
-    Role role = new Role("USER");
+    RoleDto role = new RoleDto("USER");
 
     //end
 
     @PostMapping("/register")
-    public String createAccount(@Valid @ModelAttribute("users")  User user,
+    public String createAccount(@Valid @ModelAttribute("users")  UserDto user,
                                 BindingResult result,
                                 Model model,
                                 Error error){
@@ -101,7 +103,7 @@ public class UserController {
         }
         else if(this.userService.validation(user)==true){
 
-            user.getUserRoleSet().add(role); //test purpose
+            user.getRoleSet().add(role); //test purpose
             this.userService.save(user);
             return "redirect:/api/v1/videoteka/login";
 

@@ -71,8 +71,8 @@ public class BootStrap implements CommandLineRunner {
             userRepository.save(user1);
             userRepository.save(user2);
 
-            user.getUserRoleSet().add(role);
-            user2.getUserRoleSet().add(role1);
+            user.getRoleSet().add(role);
+            user2.getRoleSet().add(role1);
 
             userRepository.save(user);
             userRepository.save(user2);

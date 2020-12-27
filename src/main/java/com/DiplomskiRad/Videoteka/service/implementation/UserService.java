@@ -2,23 +2,24 @@ package com.DiplomskiRad.Videoteka.service.implementation;
 
 
 import com.DiplomskiRad.Videoteka.domain.User;
+import com.DiplomskiRad.Videoteka.dto.UserDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
 
-    User findUserById(Long id);
+    UserDto findUserById(Long id);
 
-    List<User> findAllUsers();
+    List<UserDto> findAllUsers();
 
-    User checkIfUserIsInDatabase(String username,String password);
+    UserDto checkIfUserIsInDatabase(String username,String password);
 
     Boolean exists(String username,String password);
 
-    Optional<User> findUserByUserName(String userName);
+    Optional<UserDto> findUserByUserName(String userName);
 
-    User save(User user);
+    void save(UserDto user);
 
     Boolean checkIfPasswordMach(String password,String repeatPassword);
 
@@ -26,5 +27,5 @@ public interface UserService {
 
     boolean checkIfUsernameExists(String username);
 
-    boolean validation(User user);
+    boolean validation(UserDto user);
 }

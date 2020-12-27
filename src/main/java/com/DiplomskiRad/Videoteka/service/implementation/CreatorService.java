@@ -2,12 +2,13 @@ package com.DiplomskiRad.Videoteka.service.implementation;
 
 import com.DiplomskiRad.Videoteka.domain.Creator;
 import com.DiplomskiRad.Videoteka.domain.Star;
+import com.DiplomskiRad.Videoteka.dto.CreatorDto;
 
 import java.util.List;
 
 public interface CreatorService {
 
     void deleteCreatorById(Long id);
-    Creator findCreatorById(Long id);
-    List<Creator> getAllCreators();
+    CreatorDto findCreatorById(Long id);
+    List<CreatorDto> getAllCreators();
 }

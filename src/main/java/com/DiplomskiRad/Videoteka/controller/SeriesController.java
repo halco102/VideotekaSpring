@@ -4,6 +4,9 @@ package com.DiplomskiRad.Videoteka.controller;
 import com.DiplomskiRad.Videoteka.domain.Genre;
 import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.domain.Series;
+import com.DiplomskiRad.Videoteka.dto.GenreDto;
+import com.DiplomskiRad.Videoteka.dto.MovieDto;
+import com.DiplomskiRad.Videoteka.dto.SeriesDto;
 import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
 import com.DiplomskiRad.Videoteka.service.implementation.SeriesService;
 import com.DiplomskiRad.Videoteka.service.implementation.StarService;
@@ -60,9 +63,9 @@ public class SeriesController {
 
     @GetMapping("/admin-add-delete/series")
     public  String addEntertainment(Model model,String keyword){
-        Series series= new Series();
+        SeriesDto series= new SeriesDto();
         model.addAttribute("series",series);
-        List<Genre> genres = new ArrayList<>();
+        List<GenreDto> genres = new ArrayList<>();
         genreService.findAllGenre().iterator().forEachRemaining(genres::add);
         model.addAttribute("g",genres);
         model.addAttribute("se",seriesService.findByKeyword(keyword));
@@ -73,9 +76,9 @@ public class SeriesController {
 
 //update
     @GetMapping("/admin-add-delete/series/update/{id}")
-    public String editSeries(Model model, @PathVariable Long id, Movie movie, String keyword){
-        Series updateMovies= seriesService.findSeriesById(id);
-        List<Genre> genres = new ArrayList<>();
+    public String editSeries(Model model, @PathVariable Long id, MovieDto movie, String keyword){
+        SeriesDto updateMovies= seriesService.findSeriesById(id);
+        List<GenreDto> genres = new ArrayList<>();
         genreService.findAllGenre().iterator().forEachRemaining(genres::add);
         model.addAttribute("updateSeries",updateMovies);
         model.addAttribute("g",genreService.findAllGenre());
@@ -87,8 +90,8 @@ public class SeriesController {
 
 
     @PostMapping("/admin-add-delete/series/update")
-    public String submitForm(@Valid @ModelAttribute("updateSeries") Series series,
-                             @RequestParam("ids") List<Genre> genres,
+    public String submitForm(@Valid @ModelAttribute("updateSeries") SeriesDto series,
+                             @RequestParam("ids") List<GenreDto> genres,
                              Model model){
 
         for(int i = 0 ; i < genres.size();i++ ){

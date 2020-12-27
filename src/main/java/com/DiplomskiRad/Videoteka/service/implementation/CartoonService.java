@@ -2,27 +2,28 @@ package com.DiplomskiRad.Videoteka.service.implementation;
 
 import com.DiplomskiRad.Videoteka.domain.Cartoon;
 import com.DiplomskiRad.Videoteka.domain.Series;
+import com.DiplomskiRad.Videoteka.dto.CartoonDto;
 
 import java.util.List;
 
 public interface CartoonService {
 
 
-    Cartoon findCartoonById(Long id);
+    CartoonDto findCartoonById(Long id);
 
-    List<Cartoon> findAllCartoons();
+    List<CartoonDto> findAllCartoons();
 
     void deleteCartoonById(Long id);
 
-    List<Cartoon> findByKeyword(String keyword);
+    List<CartoonDto> findByKeyword(String keyword);
 
-    List<Cartoon> getAllCartoonGenres();
+    List<CartoonDto> getAllCartoonGenres();
 
-    void addCartoon(Cartoon cartoon);
+    void addCartoon(CartoonDto cartoonDto);
 
 
-    List<Cartoon>listOfSeriesOnGenre(String searchGenre);
+    List<CartoonDto>listOfSeriesOnGenre(String searchGenre);
 
-    List<Cartoon>searchEngine(String searchGenre,String keyword);
+    List<CartoonDto>searchEngine(String searchGenre,String keyword);
 
 }

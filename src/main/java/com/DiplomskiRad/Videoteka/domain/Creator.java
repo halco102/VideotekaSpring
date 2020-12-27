@@ -1,9 +1,16 @@
 package com.DiplomskiRad.Videoteka.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "creator")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Creator {
     @Id
     @Column(name = "id")
@@ -13,57 +20,15 @@ public class Creator {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
-
-    //Constructor
-    public Creator(){};
 
     public Creator(String firstName,String lastName){
         this.firstName=firstName;
         this.lastName=lastName;
     }
 
-    //end const
-
-    //getters n setters
-
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    //end getters n setters
 
     //hash
     @Override

@@ -1,35 +1,41 @@
 package com.DiplomskiRad.Videoteka.service;
 
 import com.DiplomskiRad.Videoteka.domain.Cartoon;
+import com.DiplomskiRad.Videoteka.dto.CartoonDto;
+import com.DiplomskiRad.Videoteka.mapper.CartoonMapper;
 import com.DiplomskiRad.Videoteka.repositories.CartoonRepository;
 import com.DiplomskiRad.Videoteka.service.implementation.CartoonService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CartoonServiceImp implements CartoonService {
 
 
     private final CartoonRepository cartoonRepository;
+    private final CartoonMapper cartoonMapper;
 
-    public CartoonServiceImp(CartoonRepository cartoonRepository) {
+    public CartoonServiceImp(CartoonRepository cartoonRepository, CartoonMapper cartoonMapper) {
         this.cartoonRepository = cartoonRepository;
+        this.cartoonMapper = cartoonMapper;
     }
 
     @Override
-    public Cartoon findCartoonById(Long id) {
-        return cartoonRepository.findById(id).get();
+    public CartoonDto findCartoonById(Long id) {
+       return cartoonMapper.toDto(cartoonRepository.findById(id).get());
     }
 
     @Override
-    public List<Cartoon> getAllCartoonGenres() {
-        return cartoonRepository.getAllCartoonGenres();
+    public List<CartoonDto> getAllCartoonGenres() {
+
+        return this.cartoonRepository.getAllCartoonGenres().stream().map(cartoonMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<Cartoon> findAllCartoons() {
-        return cartoonRepository.findAll();
+    public List<CartoonDto> findAllCartoons() {
+        return cartoonRepository.findAll().stream().map(cartoonMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
@@ -38,37 +44,35 @@ public class CartoonServiceImp implements CartoonService {
     }
 
     @Override
-    public List<Cartoon> findByKeyword(String keyword) {
+    public List<CartoonDto> findByKeyword(String keyword) {
         if(keyword!=null){
-            return this.cartoonRepository.findByKeyword(keyword);
+            return this.cartoonRepository.findByKeyword(keyword).stream().map(cartoonMapper::toDto).collect(Collectors.toList());
         }
-        if(keyword==null){
-            return this.cartoonRepository.findAll();
+        else {
+            return this.cartoonRepository.findAll().stream().map(cartoonMapper::toDto).collect(Collectors.toList());
         }
 
-        return this.cartoonRepository.getAllCartoonGenres();
-
-
     }
 
     @Override
-    public void addCartoon(Cartoon cartoon) {
-        this.cartoonRepository.save(cartoon);
+    public void addCartoon(CartoonDto cartoon) {
+        Cartoon temp = cartoonMapper.toEntity(cartoon);
+        this.cartoonRepository.save(temp);
     }
 
     @Override
-    public List<Cartoon> listOfSeriesOnGenre(String searchGenre) {
-        return this.cartoonRepository.listOfCartoonsOnGenre(searchGenre);
+    public List<CartoonDto> listOfSeriesOnGenre(String searchGenre) {
+        return this.cartoonRepository.listOfCartoonsOnGenre(searchGenre).stream().map(cartoonMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<Cartoon> searchEngine(String searchGenre, String keyword) {
+    public List<CartoonDto> searchEngine(String searchGenre, String keyword) {
         if(keyword!=null && searchGenre == null){
-            return this.cartoonRepository.findByKeyword(keyword);
+            return this.cartoonRepository.findByKeyword(keyword).stream().map(cartoonMapper::toDto).collect(Collectors.toList());
         }
         else if(keyword==null && searchGenre!=null){
-            return this.cartoonRepository.listOfCartoonsOnGenre(searchGenre);
+            return this.cartoonRepository.listOfCartoonsOnGenre(searchGenre).stream().map(cartoonMapper::toDto).collect(Collectors.toList());
         }
-        return this.cartoonRepository.findAll();
+        return this.cartoonRepository.findAll().stream().map(cartoonMapper::toDto).collect(Collectors.toList());
     }
 }

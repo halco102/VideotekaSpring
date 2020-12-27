@@ -1,8 +1,11 @@
 package com.DiplomskiRad.Videoteka.service;
 
 import com.DiplomskiRad.Videoteka.domain.User;
+import com.DiplomskiRad.Videoteka.dto.UserDto;
+import com.DiplomskiRad.Videoteka.mapper.UserMapper;
 import com.DiplomskiRad.Videoteka.repositories.UserRepository;
 import com.DiplomskiRad.Videoteka.service.implementation.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,15 +13,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
 
-    public UserServiceImp(UserRepository userRepository){
+    public UserServiceImp(UserRepository userRepository, UserMapper userMapper){
         this.userRepository=userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -43,10 +50,10 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public boolean validation(User user){
-        if(!user.getUserName().isEmpty() || !user.getPassword().isEmpty() || !user.geteMail().isEmpty() || !user.getFirstName().isEmpty()) {
+    public boolean validation(UserDto user){
+        if(!user.getUserName().isEmpty() || !user.getPassword().isEmpty() || !user.getEMail().isEmpty() || !user.getFirstName().isEmpty()) {
             if (checkIfUsernameExists(user.getUserName()) == false
-                    && checkEmail(user.geteMail()) == false
+                    && checkEmail(user.getEMail()) == false
                     && checkIfPasswordMach(user.getPassword(), user.getConfirmPassword()) == true) {
                 return true;
             }
@@ -65,28 +72,32 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByUserName(String userName) {
-        return this.userRepository.findUserByUserName(userName);
+    public Optional<UserDto> findUserByUserName(String userName) {
+        User user = new User();
+        user = this.userRepository.findUserByUserName(userName).get();
+        Optional<UserDto> optionalUserDto = Optional.ofNullable(this.userMapper.toDto(user));
+        return optionalUserDto;
     }
 
     @Override
-    public User save(User user) {
-        System.out.println("User saved!");
-        return this.userRepository.save(user);
+    public void save(UserDto user) {
+        User temp = new User();
+        temp = this.userMapper.toEntity(user);
+        this.userRepository.save(temp);
+        log.info("User saved!");
     }
 
     @Override
-    public User findUserById(Long id) {
+    public UserDto findUserById(Long id) {
         if(id==1){
-            System.out.println("Hello user");
-            return userRepository.findById(id).get();
+            return this.userMapper.toDto(userRepository.findById(id).get());
         }
         return null;
     }
 
     @Override
-    public List<User> findAllUsers() {
-        return userRepository.findAll();
+    public List<UserDto> findAllUsers() {
+        return userRepository.findAll().stream().map(userMapper::toDto).collect(Collectors.toList());
     }
 
     /*
@@ -101,8 +112,8 @@ public class UserServiceImp implements UserService {
      * */
 
     @Override
-    public User checkIfUserIsInDatabase(String username, String password) {
-        return userRepository.checkIfUserIsInDatabase(username,password);
+    public UserDto checkIfUserIsInDatabase(String username, String password) {
+        return this.userMapper.toDto(userRepository.checkIfUserIsInDatabase(username,password));
     }
 
     @Override

@@ -1,19 +1,24 @@
 package com.DiplomskiRad.Videoteka.service;
 
 import com.DiplomskiRad.Videoteka.domain.Star;
+import com.DiplomskiRad.Videoteka.dto.StarDto;
+import com.DiplomskiRad.Videoteka.mapper.StarMapper;
 import com.DiplomskiRad.Videoteka.repositories.StarRepository;
 import com.DiplomskiRad.Videoteka.service.implementation.StarService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StarServiceImp implements StarService {
 
     private final StarRepository starRepository;
+    private final StarMapper starMapper;
 
-    public StarServiceImp(StarRepository starRepository) {
+    public StarServiceImp(StarRepository starRepository, StarMapper starMapper) {
         this.starRepository = starRepository;
+        this.starMapper = starMapper;
     }
 
     @Override
@@ -22,13 +27,13 @@ public class StarServiceImp implements StarService {
     }
 
     @Override
-    public Star findStarById(Long id) {
-        return starRepository.findById(id).get();
+    public StarDto findStarById(Long id) {
+        return this.starMapper.toDto(starRepository.findById(id).get());
     }
 
     @Override
-    public List<Star> getAllStars() {
-        return starRepository.findAll();
+    public List<StarDto> getAllStars() {
+        return starRepository.findAll().stream().map(starMapper::toDto).collect(Collectors.toList());
     }
 
 }

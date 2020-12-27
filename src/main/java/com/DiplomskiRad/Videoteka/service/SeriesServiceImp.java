@@ -2,42 +2,47 @@ package com.DiplomskiRad.Videoteka.service;
 
 import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.domain.Series;
+import com.DiplomskiRad.Videoteka.dto.SeriesDto;
+import com.DiplomskiRad.Videoteka.mapper.SeriesMapper;
 import com.DiplomskiRad.Videoteka.repositories.SeriesRepository;
 import com.DiplomskiRad.Videoteka.service.implementation.SeriesService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SeriesServiceImp implements SeriesService {
     private final SeriesRepository seriesRepository;
+    private final SeriesMapper seriesMapper;
 
-    public SeriesServiceImp(SeriesRepository seriesRepository){
+    public SeriesServiceImp(SeriesRepository seriesRepository, SeriesMapper seriesMapper){
         this.seriesRepository=seriesRepository;
+        this.seriesMapper = seriesMapper;
     }
 
     @Override
-    public Series findSeriesById(Long id) {
-        return seriesRepository.findById(id).get();
+    public SeriesDto findSeriesById(Long id) {
+        return this.seriesMapper.toDto(seriesRepository.findById(id).get());
     }
 
     @Override
-    public List<Series> findAllSeries() {
-        return seriesRepository.findAll();
+    public List<SeriesDto> findAllSeries() {
+        return seriesRepository.findAll().stream().map(seriesMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<Series> getAllSeriesGenres() {
-        return seriesRepository.getAllSeriesGenres();
+    public List<SeriesDto> getAllSeriesGenres() {
+        return seriesRepository.getAllSeriesGenres().stream().map(seriesMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<Series> findByKeyword(String keyword) {
-        if(keyword!=null){return seriesRepository.findByKeyword(keyword);}
+    public List<SeriesDto> findByKeyword(String keyword) {
+        if(keyword!=null){return seriesRepository.findByKeyword(keyword).stream().map(seriesMapper::toDto).collect(Collectors.toList());}
         if(keyword==null){
-            return seriesRepository.findAll();
+            return seriesRepository.findAll().stream().map(seriesMapper::toDto).collect(Collectors.toList());
         }
-        return seriesRepository.getAllSeriesGenres();
+        return seriesRepository.getAllSeriesGenres().stream().map(seriesMapper::toDto).collect(Collectors.toList());
 
     }
 
@@ -47,24 +52,26 @@ public class SeriesServiceImp implements SeriesService {
     }
 
     @Override
-    public void saveSeries(Series series) {
-        this.seriesRepository.save(series);
+    public void saveSeries(SeriesDto series) {
+        Series temp = new Series();
+        temp = this.seriesMapper.toEntity(series);
+        this.seriesRepository.save(temp);
     }
 
     @Override
-    public List<Series> listOfSeriesOnGenre(String searchGenre) {
-        return seriesRepository.listOfSeriesOnGenre(searchGenre);
+    public List<SeriesDto> listOfSeriesOnGenre(String searchGenre) {
+        return seriesRepository.listOfSeriesOnGenre(searchGenre).stream().map(seriesMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<Series> searchEngine(String searchGenre, String keyword) {
+    public List<SeriesDto> searchEngine(String searchGenre, String keyword) {
         if(keyword!=null && searchGenre == null){
-            return this.seriesRepository.findByKeyword(keyword);
+            return this.seriesRepository.findByKeyword(keyword).stream().map(seriesMapper::toDto).collect(Collectors.toList());
         }
         else if(keyword==null && searchGenre!=null){
-            return this.seriesRepository.listOfSeriesOnGenre(searchGenre);
+            return this.seriesRepository.listOfSeriesOnGenre(searchGenre).stream().map(seriesMapper::toDto).collect(Collectors.toList());
         }
-        return this.seriesRepository.findAll();
+        return this.seriesRepository.findAll().stream().map(seriesMapper::toDto).collect(Collectors.toList());
     }
 
 }

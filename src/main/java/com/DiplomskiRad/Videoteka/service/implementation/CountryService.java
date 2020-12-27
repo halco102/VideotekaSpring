@@ -1,13 +1,14 @@
 package com.DiplomskiRad.Videoteka.service.implementation;
 
 import com.DiplomskiRad.Videoteka.domain.Country;
+import com.DiplomskiRad.Videoteka.dto.CountryDto;
 
 import java.util.List;
 
 public interface CountryService {
 
      void deleteCountryById(Long id);
-     Country findCountryById(Long id);
-     List<Country> getAllCountries();
+     CountryDto findCountryById(Long id);
+     List<CountryDto> getAllCountries();
 
 }

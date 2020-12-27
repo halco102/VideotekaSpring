@@ -1,31 +1,32 @@
 package com.DiplomskiRad.Videoteka.service.implementation;
 
 import com.DiplomskiRad.Videoteka.domain.Movie;
+import com.DiplomskiRad.Videoteka.dto.MovieDto;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface MovieService {
 
-    Movie findMoviebyId(Long id);
+    MovieDto findMoviebyId(Long id);
 
-    List<Movie> findAllMovies();
+    List<MovieDto> findAllMovies();
 
-    Movie deleteMovieById(@Param("id") Long id);
+    MovieDto deleteMovieById(@Param("id") Long id);
 
-    List<Movie> findByKeyword(String keyword);
+    List<MovieDto> findByKeyword(String keyword);
 
-    List<Movie> getAllMovieGenres();
+    List<MovieDto> getAllMovieGenres();
 
     void deleteMovie(Long id);
 
-    void addNewMovie(Movie movie);
+    void addNewMovie(MovieDto movie);
 
-    void save(Movie movie);
+    void save(MovieDto movie);
 
-    List<Movie>listOfMovieOnGenre(String searchGenre);
+    List<MovieDto>listOfMovieOnGenre(String searchGenre);
 
-    List<Movie>searchEngine(String searchGenre,String keyword);
+    List<MovieDto>searchEngine(String searchGenre,String keyword);
 
 
 }
