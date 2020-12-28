@@ -1,10 +1,9 @@
-package com.DiplomskiRad.Videoteka.service;
+package com.DiplomskiRad.Videoteka.service.implementation;
 
-import com.DiplomskiRad.Videoteka.domain.Country;
 import com.DiplomskiRad.Videoteka.dto.CountryDto;
 import com.DiplomskiRad.Videoteka.mapper.CountryMapper;
 import com.DiplomskiRad.Videoteka.repositories.CountryRepository;
-import com.DiplomskiRad.Videoteka.service.implementation.CountryService;
+import com.DiplomskiRad.Videoteka.service.CountryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

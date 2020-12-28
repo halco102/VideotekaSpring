@@ -1,10 +1,10 @@
-package com.DiplomskiRad.Videoteka.service;
+package com.DiplomskiRad.Videoteka.service.implementation;
 
 import com.DiplomskiRad.Videoteka.domain.Cartoon;
 import com.DiplomskiRad.Videoteka.dto.CartoonDto;
 import com.DiplomskiRad.Videoteka.mapper.CartoonMapper;
 import com.DiplomskiRad.Videoteka.repositories.CartoonRepository;
-import com.DiplomskiRad.Videoteka.service.implementation.CartoonService;
+import com.DiplomskiRad.Videoteka.service.CartoonService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

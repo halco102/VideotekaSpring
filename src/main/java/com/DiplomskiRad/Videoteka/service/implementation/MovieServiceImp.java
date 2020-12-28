@@ -1,16 +1,12 @@
-package com.DiplomskiRad.Videoteka.service;
+package com.DiplomskiRad.Videoteka.service.implementation;
 
-import com.DiplomskiRad.Videoteka.domain.Genre;
 import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.dto.MovieDto;
 import com.DiplomskiRad.Videoteka.mapper.MovieMapper;
 import com.DiplomskiRad.Videoteka.repositories.MovieRepository;
-import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
-import com.DiplomskiRad.Videoteka.service.implementation.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.DiplomskiRad.Videoteka.service.MovieService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

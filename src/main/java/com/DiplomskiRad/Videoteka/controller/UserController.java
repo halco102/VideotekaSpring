@@ -1,16 +1,11 @@
 package com.DiplomskiRad.Videoteka.controller;
 
 
-import com.DiplomskiRad.Videoteka.domain.Role;
-import com.DiplomskiRad.Videoteka.domain.User;
-import com.DiplomskiRad.Videoteka.dto.RoleDto;
 import com.DiplomskiRad.Videoteka.dto.UserDto;
-import com.DiplomskiRad.Videoteka.service.implementation.RoleService;
-import com.DiplomskiRad.Videoteka.service.implementation.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.DiplomskiRad.Videoteka.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +14,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping(MovieController.BASE_URL)
+@Slf4j
 public class UserController {
 
 
@@ -78,32 +74,27 @@ public class UserController {
         return "videoteka/login/create-account.html";
     }
 
-    //test purpose
+   /* //test purpose
     @Autowired
     public RoleService roleService;
-
-    RoleDto role = new RoleDto("USER");
-
-    //end
+    @Autowired
+    private RoleMapper roleMapper;
+    //end*/
 
     @PostMapping("/register")
     public String createAccount(@Valid @ModelAttribute("users")  UserDto user,
                                 BindingResult result,
                                 Model model,
                                 Error error){
-
-
         //provjeriti da li postoji user u bazi, ako postoji baci error ako ne nastavi dalje sa pregledom, tj provjeri jel
         //email validan ili je vec koji postoji u bazi
-        roleService.save(role); //test line
-
 
         if (result.hasErrors()) {
             return "videoteka/login/create-account.html";
         }
         else if(this.userService.validation(user)==true){
 
-            user.getRoleSet().add(role); //test purpose
+           // user.getRoleSet().add(this.roleService.findByRole(2L)); //test purpose when using Bootstrap!!
             this.userService.save(user);
             return "redirect:/api/v1/videoteka/login";
 

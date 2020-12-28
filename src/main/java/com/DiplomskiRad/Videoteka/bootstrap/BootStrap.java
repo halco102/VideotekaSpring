@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Component
-public class BootStrap implements CommandLineRunner {
+public class BootStrap  {
+/*
 
     private final MovieRepository movieRepository;
     private final GenreRepository genreRepository;
@@ -208,4 +209,5 @@ public class BootStrap implements CommandLineRunner {
 
 
     }
+*/
 }

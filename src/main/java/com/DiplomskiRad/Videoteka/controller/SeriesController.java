@@ -1,17 +1,12 @@
 package com.DiplomskiRad.Videoteka.controller;
 
 
-import com.DiplomskiRad.Videoteka.domain.Genre;
-import com.DiplomskiRad.Videoteka.domain.Movie;
-import com.DiplomskiRad.Videoteka.domain.Series;
 import com.DiplomskiRad.Videoteka.dto.GenreDto;
 import com.DiplomskiRad.Videoteka.dto.MovieDto;
 import com.DiplomskiRad.Videoteka.dto.SeriesDto;
-import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
-import com.DiplomskiRad.Videoteka.service.implementation.SeriesService;
-import com.DiplomskiRad.Videoteka.service.implementation.StarService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.DiplomskiRad.Videoteka.service.GenreService;
+import com.DiplomskiRad.Videoteka.service.SeriesService;
+import com.DiplomskiRad.Videoteka.service.StarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

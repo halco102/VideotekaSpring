@@ -1,10 +1,9 @@
-package com.DiplomskiRad.Videoteka.service;
+package com.DiplomskiRad.Videoteka.service.implementation;
 
-import com.DiplomskiRad.Videoteka.domain.Creator;
 import com.DiplomskiRad.Videoteka.dto.CreatorDto;
 import com.DiplomskiRad.Videoteka.mapper.CreatorMapper;
 import com.DiplomskiRad.Videoteka.repositories.CreatorRepository;
-import com.DiplomskiRad.Videoteka.service.implementation.CreatorService;
+import com.DiplomskiRad.Videoteka.service.CreatorService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

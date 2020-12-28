@@ -1,10 +1,10 @@
-package com.DiplomskiRad.Videoteka.service;
+package com.DiplomskiRad.Videoteka.service.implementation;
 
 import com.DiplomskiRad.Videoteka.domain.Genre;
 import com.DiplomskiRad.Videoteka.dto.GenreDto;
 import com.DiplomskiRad.Videoteka.mapper.GenreMapper;
 import com.DiplomskiRad.Videoteka.repositories.GenreRepository;
-import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
+import com.DiplomskiRad.Videoteka.service.GenreService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

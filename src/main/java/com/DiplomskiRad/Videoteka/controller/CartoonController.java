@@ -1,14 +1,11 @@
 package com.DiplomskiRad.Videoteka.controller;
 
-import com.DiplomskiRad.Videoteka.domain.Cartoon;
-import com.DiplomskiRad.Videoteka.domain.Genre;
 import com.DiplomskiRad.Videoteka.domain.Movie;
-import com.DiplomskiRad.Videoteka.domain.Series;
 import com.DiplomskiRad.Videoteka.dto.CartoonDto;
 import com.DiplomskiRad.Videoteka.dto.GenreDto;
-import com.DiplomskiRad.Videoteka.service.implementation.CartoonService;
-import com.DiplomskiRad.Videoteka.service.implementation.CreatorService;
-import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
+import com.DiplomskiRad.Videoteka.service.CartoonService;
+import com.DiplomskiRad.Videoteka.service.CreatorService;
+import com.DiplomskiRad.Videoteka.service.GenreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

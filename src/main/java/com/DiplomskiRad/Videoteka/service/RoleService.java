@@ -1,4 +1,4 @@
-package com.DiplomskiRad.Videoteka.service.implementation;
+package com.DiplomskiRad.Videoteka.service;
 
 import com.DiplomskiRad.Videoteka.domain.Role;
 import com.DiplomskiRad.Videoteka.dto.RoleDto;

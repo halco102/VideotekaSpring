@@ -1,11 +1,9 @@
 package com.DiplomskiRad.Videoteka.security;
 
-import com.DiplomskiRad.Videoteka.domain.Role;
-import com.DiplomskiRad.Videoteka.domain.User;
 import com.DiplomskiRad.Videoteka.dto.RoleDto;
 import com.DiplomskiRad.Videoteka.dto.UserDto;
 import com.DiplomskiRad.Videoteka.repositories.UserRepository;
-import com.DiplomskiRad.Videoteka.service.implementation.UserService;
+import com.DiplomskiRad.Videoteka.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -1,4 +1,4 @@
-package com.DiplomskiRad.Videoteka.service.implementation;
+package com.DiplomskiRad.Videoteka.service;
 
 import com.DiplomskiRad.Videoteka.domain.Creator;
 import com.DiplomskiRad.Videoteka.domain.Star;

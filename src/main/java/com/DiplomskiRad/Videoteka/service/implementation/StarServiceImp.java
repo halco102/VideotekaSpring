@@ -1,10 +1,9 @@
-package com.DiplomskiRad.Videoteka.service;
+package com.DiplomskiRad.Videoteka.service.implementation;
 
-import com.DiplomskiRad.Videoteka.domain.Star;
 import com.DiplomskiRad.Videoteka.dto.StarDto;
 import com.DiplomskiRad.Videoteka.mapper.StarMapper;
 import com.DiplomskiRad.Videoteka.repositories.StarRepository;
-import com.DiplomskiRad.Videoteka.service.implementation.StarService;
+import com.DiplomskiRad.Videoteka.service.StarService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

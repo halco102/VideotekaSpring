@@ -51,7 +51,7 @@
           <th>Runtime</th>
           <th>Genre</th>
           <th>Stars</th>
-          <th>Buy</th>
+
       </tr>
       <tr th:each="movie : ${movies}">
           <td th:text="${movie.id}"></td>
@@ -64,10 +64,6 @@
           <td><span th:each="stars : ${movie.stars}"
                     th:text="${stars.firstName+ ' ' + stars.lastName +',' + ' '}">
           </span></td>
-
-          <td>
-                <td><a th:href="@{/api/v1/videoteka/movies/buy/{id}(id=${movie.id})}"><b>Buy</b></a></td>
-          </td>
       </tr>
 
 

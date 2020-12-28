@@ -1,14 +1,11 @@
-package com.DiplomskiRad.Videoteka.service;
+package com.DiplomskiRad.Videoteka.service.implementation;
 
 import com.DiplomskiRad.Videoteka.domain.User;
 import com.DiplomskiRad.Videoteka.dto.UserDto;
 import com.DiplomskiRad.Videoteka.mapper.UserMapper;
 import com.DiplomskiRad.Videoteka.repositories.UserRepository;
-import com.DiplomskiRad.Videoteka.service.implementation.UserService;
+import com.DiplomskiRad.Videoteka.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,10 +1,10 @@
-package com.DiplomskiRad.Videoteka.service;
+package com.DiplomskiRad.Videoteka.service.implementation;
 
 import com.DiplomskiRad.Videoteka.domain.Role;
 import com.DiplomskiRad.Videoteka.dto.RoleDto;
 import com.DiplomskiRad.Videoteka.mapper.RoleMapper;
 import com.DiplomskiRad.Videoteka.repositories.RoleRepository;
-import com.DiplomskiRad.Videoteka.service.implementation.RoleService;
+import com.DiplomskiRad.Videoteka.service.RoleService;
 import org.springframework.stereotype.Service;
 
 @Service

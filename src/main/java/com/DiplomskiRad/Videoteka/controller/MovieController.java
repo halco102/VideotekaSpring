@@ -1,14 +1,12 @@
 package com.DiplomskiRad.Videoteka.controller;
 
 
-import com.DiplomskiRad.Videoteka.domain.Genre;
-import com.DiplomskiRad.Videoteka.domain.Movie;
 import com.DiplomskiRad.Videoteka.dto.GenreDto;
 import com.DiplomskiRad.Videoteka.dto.MovieDto;
 import com.DiplomskiRad.Videoteka.repositories.GenreRepository;
-import com.DiplomskiRad.Videoteka.service.implementation.GenreService;
-import com.DiplomskiRad.Videoteka.service.implementation.MovieService;
-import com.DiplomskiRad.Videoteka.service.implementation.StarService;
+import com.DiplomskiRad.Videoteka.service.GenreService;
+import com.DiplomskiRad.Videoteka.service.MovieService;
+import com.DiplomskiRad.Videoteka.service.StarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
